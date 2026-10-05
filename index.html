@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mark Herdt – Game Programmer &amp; Designer</title>
+<meta name="description" content="Mark Herdt – Unity & C# game programmer &amp; designer from Germany. Portfolio, projects and resume.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0e1116;--surface:#161b22;--surface2:#1f2630;--text:#e6edf3;--muted:#9aa5b1;
+  --accent:#5eead4;--accent2:#a78bfa;--border:#2a323d;--radius:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif;line-height:1.6}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+nav{position:sticky;top:0;z-index:10;background:rgba(14,17,22,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+nav .wrap{display:flex;justify-content:space-between;align-items:center;height:60px}
+.logo{font-family:"JetBrains Mono",monospace;font-weight:500;color:var(--text)}
+.logo span{color:var(--accent)}
+nav ul{list-style:none;display:flex;gap:22px}
+nav ul a{color:var(--muted);font-size:.95rem}
+nav ul a:hover{color:var(--text);text-decoration:none}
+header{padding:110px 0 80px}
+.tag{font-family:"JetBrains Mono",monospace;color:var(--accent);font-size:.95rem;margin-bottom:14px}
+h1{font-size:clamp(2.4rem,6vw,4rem);font-weight:800;line-height:1.1;letter-spacing:-.02em}
+h1 .grad{background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{color:var(--muted);font-size:1.15rem;max-width:620px;margin:22px 0 32px}
+.btns{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-block;padding:11px 20px;border-radius:10px;font-weight:600;border:1px solid var(--border);color:var(--text);background:var(--surface)}
+.btn:hover{text-decoration:none;border-color:var(--accent)}
+.btn.primary{background:var(--accent);color:#0b1f1c;border-color:var(--accent)}
+section{padding:70px 0;border-top:1px solid var(--border)}
+h2{font-size:1.8rem;margin-bottom:8px}
+.sub{color:var(--muted);margin-bottom:34px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;transition:transform .2s,border-color .2s}
+.card:hover{transform:translateY(-4px);border-color:var(--accent)}
+.card img{width:100%;aspect-ratio:460/215;object-fit:cover;background:var(--surface2)}
+.ph{aspect-ratio:460/215;display:grid;place-items:center;font-family:"JetBrains Mono",monospace;font-size:1.3rem;color:var(--accent);background:linear-gradient(135deg,#1b2a33,#2a2140)}
+.card .body{padding:20px;flex:1;display:flex;flex-direction:column}
+.card h3{font-size:1.2rem;margin-bottom:6px}
+.card p{color:var(--muted);font-size:.95rem;flex:1}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0}
+.chip{font-size:.75rem;padding:3px 9px;border-radius:99px;background:var(--surface2);color:var(--muted);border:1px solid var(--border)}
+.chip.hi{color:var(--accent);border-color:rgba(94,234,212,.4)}
+.links{display:flex;gap:16px;font-weight:600;font-size:.92rem}
+.games{grid-template-columns:repeat(2,minmax(0,360px));justify-content:center}
+@media(max-width:760px){.games{grid-template-columns:1fr}}
+.featured{grid-column:1/-1;display:grid;grid-template-columns:1.2fr 1fr}
+.featured img{height:100%;aspect-ratio:auto}
+@media(max-width:760px){.featured{grid-template-columns:1fr}.featured img{aspect-ratio:460/215}nav ul{display:none}}
+.timeline{border-left:2px solid var(--border);margin-left:6px}
+.item{position:relative;padding:0 0 34px 28px}
+.item::before{content:"";position:absolute;left:-8px;top:6px;width:14px;height:14px;border-radius:50%;background:var(--bg);border:2px solid var(--accent)}
+.item .when{font-family:"JetBrains Mono",monospace;font-size:.85rem;color:var(--accent)}
+.item h3{font-size:1.1rem;margin:2px 0}
+.item .org{color:var(--muted);font-size:.95rem;margin-bottom:6px}
+.item p{color:var(--muted);font-size:.95rem}
+.skills{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+.skill{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px}
+.skill h4{font-size:.85rem;text-transform:uppercase;letter-spacing:.08em;color:var(--accent2);margin-bottom:10px}
+.about{display:grid;grid-template-columns:1.4fr 1fr;gap:40px;align-items:start}
+.about p{color:var(--muted);margin-bottom:14px}
+.facts{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:22px;list-style:none}
+.facts li{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid var(--border);font-size:.95rem}
+.facts li:last-child{border:0}
+.facts b{color:var(--text);font-weight:600}.facts span{color:var(--muted);text-align:right}
+@media(max-width:760px){.about{grid-template-columns:1fr}}
+.contact{text-align:center}
+.contact .btns{justify-content:center;margin-top:24px}
+footer{padding:30px 0;text-align:center;color:var(--muted);font-size:.85rem;border-top:1px solid var(--border)}
+</style>
+</head>
+<body>
+
+<nav><div class="wrap">
+  <a class="logo" href="#top">mark<span>.herdt</span>()</a>
+  <ul>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#tools">Unity Tools</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</div></nav>
+
+<header id="top"><div class="wrap">
+  <p class="tag">// Game Programmer &amp; Designer · Unity &amp; C# · Germany</p>
+  <h1>Hi, I'm Mark Herdt.<br><span class="grad">I make games.</span></h1>
+  <p class="lead">Game developer with ~7 years of Unity and C# experience, 2 years as a professional software developer, and a self-published Steam game rated <b>Very Positive</b> by over a thousand players.</p>
+  <div class="btns">
+    <a class="btn primary" href="#projects">See my work</a>
+    <a class="btn" href="https://github.com/MomSesImSpcl" target="_blank" rel="noopener">GitHub</a>
+    <a class="btn" href="https://momsesimspcl.itch.io/" target="_blank" rel="noopener">itch.io</a>
+    <a class="btn" href="Mark_Herdt_CV.pdf" target="_blank" rel="noopener" download>Download CV</a>
+  </div>
+</div></header>
+
+<section id="projects"><div class="wrap">
+  <h2>Games</h2>
+  <p class="sub">Projects I designed and programmed.</p>
+  <div class="grid games">
+
+    <article class="card featured">
+      <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2658820/header.jpg" alt="Watermelon Game key art">
+      <div class="body">
+        <h3>Watermelon Game</h3>
+        <p>A casual physics puzzle game: drop and combine matching fruits to score points and beat your highscore. Built solo and released on Steam in November 2023, and also published on the Microsoft Store, including multiplayer / PvP modes.</p>
+        <div class="chips">
+          <span class="chip hi">Steam · Very Positive (91%)</span>
+          <span class="chip">1,000+ reviews</span>
+          <span class="chip">Unity</span><span class="chip">C#</span>
+          <span class="chip">Multiplayer</span><span class="chip">Physics</span>
+        </div>
+        <div class="links">
+          <a href="https://store.steampowered.com/app/2658820/Watermelon_Game/" target="_blank" rel="noopener">Steam page →</a>
+          <a href="https://momsesimspcl.itch.io/watermelon-game" target="_blank" rel="noopener">itch.io →</a>
+          <a href="https://apps.microsoft.com/detail/9pbqvg3xw0nq" target="_blank" rel="noopener">Microsoft Store →</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <img src="images/rogue-deck.jpg" alt="Rogue Deck cover art">
+      <div class="body">
+        <h3>Rogue Deck <span class="chip hi" style="vertical-align:middle">In development</span></h3>
+        <p>My current project: a roguelike deck-building game. Not publicly released yet, but you can download the current build.</p>
+        <div class="chips"><span class="chip">Unity</span><span class="chip">C#</span><span class="chip">Roguelike</span><span class="chip">Card game</span><span class="chip">Multiplayer</span></div>
+        <div class="links"><a href="https://momsesimspcl.itch.io/rogue-deck/download/fBLCvmYwULnReEncoBvvq3vEXXSxOpyujAYdBOfm" target="_blank" rel="noopener">Download build →</a></div>
+      </div>
+    </article>
+
+    <article class="card">
+      <img src="images/queue-connect.jpg" alt="Queue Connect robot">
+      <div class="body">
+        <h3>Queue Connect</h3>
+        <p>A mobile endless runner where you race against the clock to repair as many robots as possible. Built with a fellow student at the School of Games and published on the Google Play Store (no longer listed). Still available on itch.io.</p>
+        <div class="chips"><span class="chip">Unity</span><span class="chip">C#</span><span class="chip">Google Play</span><span class="chip">Team of 2</span><span class="chip">Mobile</span></div>
+        <div class="links"><a href="https://momsesimspcl.itch.io/queue-connect" target="_blank" rel="noopener">Play on itch.io →</a></div>
+      </div>
+    </article>
+
+  </div>
+</div></section>
+
+<section id="tools"><div class="wrap">
+  <h2>Unity Tools &amp; Plugins</h2>
+  <p class="sub">Open-source tooling I built to speed up Unity development.</p>
+  <div class="grid">
+    <article class="card"><div class="body">
+      <h3>CustomScriptTemplates</h3>
+      <p>Unity editor plugin for creating and managing custom script templates.</p>
+      <div class="chips"><span class="chip">C#</span><span class="chip">Editor tooling</span></div>
+      <div class="links"><a href="https://github.com/MomSesImSpcl/CustomScriptTemplates" target="_blank" rel="noopener">View on GitHub →</a></div>
+    </div></article>
+    <article class="card"><div class="body">
+      <h3>Utilities</h3>
+      <p>A collection of extension and utility methods for Unity projects.</p>
+      <div class="chips"><span class="chip">C#</span><span class="chip">Library</span></div>
+      <div class="links"><a href="https://github.com/MomSesImSpcl/Utilities" target="_blank" rel="noopener">View on GitHub →</a></div>
+    </div></article>
+    <article class="card"><div class="body">
+      <h3>More on GitHub</h3>
+      <p>Further plugins, experiments and game projects.</p>
+      <div class="links"><a href="https://github.com/MomSesImSpcl?tab=repositories" target="_blank" rel="noopener">All repositories →</a></div>
+    </div></article>
+  </div>
+</div></section>
+
+<section id="experience"><div class="wrap">
+  <h2>Experience &amp; Education</h2>
+  <p class="sub">&nbsp;</p>
+  <div class="timeline">
+    <div class="item">
+      <div class="when">2023 – today</div>
+      <h3>Independent Game Developer</h3>
+      <div class="org">Self-employed projects</div>
+      <p>Designed, programmed and published Watermelon Game on Steam (Very Positive, 1,000+ reviews). Developing Rogue Deck and open-source Unity plugins.</p>
+      <div class="chips"><span class="chip">Unity</span><span class="chip">Game Design</span><span class="chip">.NET</span><span class="chip">C#</span><span class="chip">Marketing</span></div>
+    </div>
+    <div class="item">
+      <div class="when">2021 – 2023</div>
+      <h3>Software Developer</h3>
+      <div class="org">5Minds IT-Solutions GmbH &amp; Co. KG</div>
+      <p>Developed management software for solar plants and solar parks in .NET / C#, as part of a team of around 50 developers.</p>
+      <div class="chips"><span class="chip">.NET</span><span class="chip">C#</span><span class="chip">Energy sector</span></div>
+    </div>
+    <div class="item">
+      <div class="when">2019 – 2021</div>
+      <h3>Game Programmer (Education)</h3>
+      <div class="org"><a href="https://schoolofgames.com/en/" target="_blank" rel="noopener">School of Games</a>, Cologne</div>
+      <p>Two-year game programming and design education; graduated 2021.</p>
+      <div class="chips"><span class="chip">Unity</span><span class="chip">Game Design</span><span class="chip">.NET</span><span class="chip">C#</span></div>
+    </div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>Skills</h2>
+  <p class="sub">&nbsp;</p>
+  <div class="skills">
+    <div class="skill"><h4>Engine</h4><div class="chips"><span class="chip hi">Unity</span><span class="chip">Editor tooling</span><span class="chip">WebGL</span><span class="chip">Multiplayer</span></div></div>
+    <div class="skill"><h4>Languages</h4><div class="chips"><span class="chip">C#</span><span class="chip">.NET</span></div></div>
+    <div class="skill"><h4>Tools</h4><div class="chips"><span class="chip">JetBrains Rider</span><span class="chip">Git / GitHub</span><span class="chip">Steamworks</span></div></div>
+    <div class="skill"><h4>Shipping</h4><div class="chips"><span class="chip">Steam release</span><span class="chip">Play Store</span><span class="chip">Microsoft Store</span><span class="chip">itch.io</span></div></div>
+  </div>
+</div></section>
+
+<section id="about"><div class="wrap about">
+  <div>
+    <h2>About me</h2>
+    <p>I'm a game developer from Germany. I studied game development at the School of Games in Cologne, Germany, then worked two years as a software developer at 5Minds IT-Solutions, building .NET management software for solar parks as part of a team of about 50.</p>
+    <p>Since 2023 I've focused fully on my own games: I took Watermelon Game from idea to a Steam release with over a thousand player reviews, and I'm now building Rogue Deck alongside open-source Unity tools.</p>
+    <p>I'm looking for a team where I can bring that end-to-end experience to bigger projects.</p>
+  </div>
+  <ul class="facts">
+    <li><b>Location</b><span>Germany</span></li>
+    <li><b>Focus</b><span>Gameplay &amp; tools programming, Game design</span></li>
+    <li><b>Unity / C#</b><span>~7 years</span></li>
+    <li><b>Languages</b><span>German, English</span></li>
+  </ul>
+</div></section>
+
+<section id="contact" class="contact"><div class="wrap">
+  <h2>Let's work together</h2>
+  <p class="sub">Open to game programming roles. I'm happy to share builds, code samples or my CV.</p>
+  <div class="btns">
+    <a class="btn primary" href="mailto:herdt.mark@gmail.com">herdt.mark@gmail.com</a>
+    <a class="btn" href="https://github.com/MomSesImSpcl" target="_blank" rel="noopener">GitHub</a>
+    <!-- <a class="btn" href="https://www.linkedin.com/in/YOUR-PROFILE" target="_blank" rel="noopener">LinkedIn</a> -->
+  </div>
+</div></section>
+
+<footer>© 2026 Mark Herdt</footer>
+</body>
+</html>
