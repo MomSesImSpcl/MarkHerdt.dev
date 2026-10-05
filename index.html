@@ -2,9 +2,15 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Mark Herdt – Game Programmer &amp; Designer</title>
 <meta name="description" content="Mark Herdt – Unity & C# game programmer &amp; designer from Germany. Portfolio, projects and resume.">
+<meta property="og:title" content="Mark Herdt – Game Programmer &amp; Designer">
+<meta property="og:description" content="Unity &amp; C# game developer from Germany. Creator of Watermelon Game on Steam.">
+<meta property="og:image" content="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2658820/header.jpg">
+<meta property="og:url" content="https://momsesimspcl.github.io/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Crect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%235eead4%22/%3E%3Ctext x=%2250%22 y=%2268%22 font-size=%2252%22 font-family=%22Arial%22 font-weight=%22bold%22 text-anchor=%22middle%22 fill=%22%230e1116%22%3EMH%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
@@ -49,11 +55,21 @@ h2{font-size:1.8rem;margin-bottom:8px}
 .chip{font-size:.75rem;padding:3px 9px;border-radius:99px;background:var(--surface2);color:var(--muted);border:1px solid var(--border)}
 .chip.hi{color:var(--accent);border-color:rgba(94,234,212,.4)}
 .links{display:flex;gap:16px;font-weight:600;font-size:.92rem}
-.games{grid-template-columns:repeat(2,minmax(0,360px));justify-content:center}
-@media(max-width:760px){.games{grid-template-columns:1fr}}
-.featured{grid-column:1/-1;display:grid;grid-template-columns:1.2fr 1fr}
-.featured img{height:100%;aspect-ratio:auto}
-@media(max-width:760px){.featured{grid-template-columns:1fr}.featured img{aspect-ratio:460/215}nav ul{display:none}}
+.games{grid-template-columns:repeat(3,1fr)}
+@media(max-width:900px){.games{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.games{grid-template-columns:1fr}}
+.vid img{aspect-ratio:460/215;object-fit:cover}
+.btn.small{padding:8px 14px;font-size:.88rem;margin-top:14px;align-self:flex-start}
+.vid{position:relative;cursor:pointer;overflow:hidden;background:#000}
+.vid img{display:block;transition:transform .3s,opacity .3s}
+.vid:hover img{transform:scale(1.04);opacity:.8}
+.vid .play{position:absolute;inset:0;margin:auto;width:64px;height:64px;border-radius:50%;background:rgba(14,17,22,.75);border:2px solid var(--accent);color:var(--accent);display:grid;place-items:center;font-size:24px;padding-left:4px}
+.vid iframe{width:100%;aspect-ratio:16/9;border:0;display:block}
+.featured .vid{display:flex;align-items:center}
+.vid img{width:100%}
+.links{flex-wrap:wrap;row-gap:4px}
+.links a{white-space:nowrap}
+@media(max-width:760px){nav ul{display:none}}
 .timeline{border-left:2px solid var(--border);margin-left:6px}
 .item{position:relative;padding:0 0 34px 28px}
 .item::before{content:"";position:absolute;left:-8px;top:6px;width:14px;height:14px;border-radius:50%;background:var(--bg);border:2px solid var(--accent)}
@@ -106,11 +122,11 @@ footer{padding:30px 0;text-align:center;color:var(--muted);font-size:.85rem;bord
   <p class="sub">Projects I designed and programmed.</p>
   <div class="grid games">
 
-    <article class="card featured">
-      <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2658820/header.jpg" alt="Watermelon Game key art">
+    <article class="card">
+      <div class="vid" data-id="RMRHCmWvCqo" role="button" tabindex="0" aria-label="Play trailer"><img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2658820/header.jpg" alt="Watermelon Game key art"><span class="play">▶</span></div>
       <div class="body">
         <h3>Watermelon Game</h3>
-        <p>A casual physics puzzle game: drop and combine matching fruits to score points and beat your highscore. Built solo and released on Steam in November 2023, and also published on the Microsoft Store, including multiplayer / PvP modes.</p>
+        <p>A casual physics puzzle game: drop and combine matching fruits to score points and beat your high score, with multiplayer / PvP modes. Built solo, released on Steam in November 2023 and also published on the Microsoft Store.</p>
         <div class="chips">
           <span class="chip hi">Steam · Very Positive (91%)</span>
           <span class="chip">1,000+ reviews</span>
@@ -122,26 +138,29 @@ footer{padding:30px 0;text-align:center;color:var(--muted);font-size:.85rem;bord
           <a href="https://momsesimspcl.itch.io/watermelon-game" target="_blank" rel="noopener">itch.io →</a>
           <a href="https://apps.microsoft.com/detail/9pbqvg3xw0nq" target="_blank" rel="noopener">Microsoft Store →</a>
         </div>
+        <a class="btn small" href="games/watermelon-game.html">Design details →</a>
       </div>
     </article>
 
     <article class="card">
-      <img src="images/rogue-deck.jpg" alt="Rogue Deck cover art">
+      <div class="vid" data-id="0nubLGzscEs" role="button" tabindex="0" aria-label="Play trailer"><img src="images/rogue-deck.jpg" alt="Rogue Deck cover art"><span class="play">▶</span></div>
       <div class="body">
         <h3>Rogue Deck <span class="chip hi" style="vertical-align:middle">In development</span></h3>
-        <p>My current project: a roguelike deck-building game. Not publicly released yet, but you can download the current build.</p>
+        <p>My current project: a 2–4 player card game, as simple as UNO but with deck building and roguelike upgrades. Not released yet, but you can download the current build.</p>
         <div class="chips"><span class="chip">Unity</span><span class="chip">C#</span><span class="chip">Roguelike</span><span class="chip">Card game</span><span class="chip">Multiplayer</span></div>
         <div class="links"><a href="https://momsesimspcl.itch.io/rogue-deck/download/fBLCvmYwULnReEncoBvvq3vEXXSxOpyujAYdBOfm" target="_blank" rel="noopener">Download build →</a></div>
+        <a class="btn small" href="games/rogue-deck.html">Design details →</a>
       </div>
     </article>
 
     <article class="card">
-      <img src="images/queue-connect.jpg" alt="Queue Connect robot">
+      <div class="vid" data-id="miJXlEMbDK8" role="button" tabindex="0" aria-label="Play trailer"><img src="images/queue-connect.jpg" alt="Queue Connect robot"><span class="play">▶</span></div>
       <div class="body">
         <h3>Queue Connect</h3>
-        <p>A mobile endless runner where you race against the clock to repair as many robots as possible. Built with a fellow student at the School of Games and published on the Google Play Store (no longer listed). Still available on itch.io.</p>
+        <p>A mobile arcade game: repair robots on a speeding conveyor belt by tapping the right parts before they roll away. Started as our Global Game Jam 2020 entry, then polished with a fellow School of Games student (I did design &amp; programming) and published on the Google Play Store (no longer listed). Still available on itch.io.</p>
         <div class="chips"><span class="chip">Unity</span><span class="chip">C#</span><span class="chip">Google Play</span><span class="chip">Team of 2</span><span class="chip">Mobile</span></div>
         <div class="links"><a href="https://momsesimspcl.itch.io/queue-connect" target="_blank" rel="noopener">Play on itch.io →</a></div>
+        <a class="btn small" href="games/queue-connect.html">Design details →</a>
       </div>
     </article>
 
@@ -214,13 +233,13 @@ footer{padding:30px 0;text-align:center;color:var(--muted);font-size:.85rem;bord
 <section id="about"><div class="wrap about">
   <div>
     <h2>About me</h2>
-    <p>I'm a game developer from Germany. I studied game development at the School of Games in Cologne, Germany, then worked two years as a software developer at 5Minds IT-Solutions, building .NET management software for solar parks as part of a team of about 50.</p>
+    <p>I'm a game developer from Germany. I studied game development at the School of Games in Cologne, Germany, then worked for two years as a software developer at 5Minds IT-Solutions, building .NET management software for solar parks as part of a team of about 50.</p>
     <p>Since 2023 I've focused fully on my own games: I took Watermelon Game from idea to a Steam release with over a thousand player reviews, and I'm now building Rogue Deck alongside open-source Unity tools.</p>
     <p>I'm looking for a team where I can bring that end-to-end experience to bigger projects.</p>
   </div>
   <ul class="facts">
     <li><b>Location</b><span>Germany</span></li>
-    <li><b>Focus</b><span>Gameplay &amp; tools programming, Game design</span></li>
+    <li><b>Focus</b><span>Gameplay &amp; tools programming, game design</span></li>
     <li><b>Unity / C#</b><span>~7 years</span></li>
     <li><b>Languages</b><span>German, English</span></li>
   </ul>
@@ -228,14 +247,16 @@ footer{padding:30px 0;text-align:center;color:var(--muted);font-size:.85rem;bord
 
 <section id="contact" class="contact"><div class="wrap">
   <h2>Let's work together</h2>
-  <p class="sub">Open to game programming roles. I'm happy to share builds, code samples or my CV.</p>
+  <p class="sub">Open to game programming and game design roles. I'm happy to share builds, code samples or my CV.</p>
   <div class="btns">
     <a class="btn primary" href="mailto:herdt.mark@gmail.com">herdt.mark@gmail.com</a>
-    <a class="btn" href="https://github.com/MomSesImSpcl" target="_blank" rel="noopener">GitHub</a>
     <!-- <a class="btn" href="https://www.linkedin.com/in/YOUR-PROFILE" target="_blank" rel="noopener">LinkedIn</a> -->
   </div>
 </div></section>
 
 <footer>© 2026 Mark Herdt</footer>
+<script>
+document.querySelectorAll('.vid').forEach(v=>{const go=()=>{v.innerHTML='<iframe referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube-nocookie.com/embed/'+v.dataset.id+'?autoplay=1" title="Trailer" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';};v.addEventListener('click',go);v.addEventListener('keydown',e=>{if(e.key==='Enter')go();});});
+</script>
 </body>
 </html>
