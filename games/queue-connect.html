@@ -23,6 +23,18 @@ h2{font-size:1.5rem;margin-bottom:12px}p,li{color:#c9d3dc}ul{margin-left:20px}
 .links{display:flex;flex-wrap:wrap;gap:12px;margin-top:10px}
 .btn{display:inline-block;padding:10px 18px;border-radius:10px;border:1px solid var(--border);background:var(--surface);color:var(--text);font-weight:600}
 .btn:hover{border-color:var(--accent);text-decoration:none}
+.flow{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:24px 16px;margin:18px 0;display:flex;flex-direction:column;align-items:center;gap:0}
+.flow .ft{font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:14px}
+.node{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:10px 16px;text-align:center;font-size:.92rem;max-width:340px;color:var(--text)}
+.node small{display:block;color:var(--muted);font-size:.78rem;margin-top:2px}
+.node.start{border-color:var(--accent);color:var(--accent);font-weight:600}
+.node.dec{border:1px dashed var(--accent2);color:var(--accent2);font-weight:600}
+.node.good{border-color:#4ade80;color:#bbf7d0}.node.bad{border-color:#f87171;color:#fecaca}.node.end{border-color:#fbbf24;color:#fde68a;font-weight:600}
+.arrow{width:2px;height:22px;background:var(--border);position:relative;margin:2px 0 6px}.arrow::after{content:"";position:absolute;bottom:-5px;left:-4px;border:5px solid transparent;border-top-color:var(--border)}
+.branch{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;width:100%}
+.branch>div{display:flex;flex-direction:column;align-items:center;flex:1;min-width:140px;max-width:280px}
+.lbl{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:4px}
+.loop{margin-top:6px;font-size:.85rem;color:var(--accent);border:1px solid var(--accent);border-radius:99px;padding:4px 14px}
 footer{padding:30px 0;text-align:center;color:var(--muted);font-size:.85rem;border-top:1px solid var(--border)}</style></head><body>
 <nav><div class="wrap"><a class="logo" href="../index.html">mark<span>.herdt</span>()</a><a href="../index.html#projects">← Back to all games</a></div></nav>
 <main class="wrap">
@@ -36,7 +48,7 @@ footer{padding:30px 0;text-align:center;color:var(--muted);font-size:.85rem;bord
 <li><b>Rising pressure:</b> the belt speeds up over time, which shortens how long each robot stays selected and repairable. Runs usually last 10–15 minutes, depending on skill.</li>
 <li><b>Decoy parts:</b> the extra parts on the screens mean the player has to actually read each robot instead of tapping on reflex.</li>
 <li><b>Buffs:</b> random power-ups appear on the belt and can be tapped to activate: extra health, a temporary slowdown, or auto-repair for a few seconds. Grabbing one costs time, which creates a small risk/reward decision.</li>
-</ul></section><section><h2>Designing for mobile</h2><p>The game jam prototype was a PC game with a single part screen, played with the mouse. For the mobile version we redesigned the layout around how people hold a phone:</p>
+</ul><div class="flow"><div class="ft">Core loop: one robot</div><div class="node start">Robot arrives on the belt<small>random missing parts</small></div><div class="arrow"></div><div class="node ">Tap a part on the side screens<small>decoy parts mixed in</small></div><div class="arrow"></div><div class="node dec">Right part?</div><div class="arrow"></div><div class="branch"><div><span class="lbl">Yes</span><div class="node good">Part attached</div><div class="arrow"></div><div class="node good">Robot complete → +1 score</div></div><div><span class="lbl">No</span><div class="node bad">Lose 1 life<small>3 lives total</small></div></div></div><div class="arrow"></div><div class="node dec">Robot leaves unrepaired?<small>also costs 1 life</small></div><div class="arrow"></div><div class="node ">Belt speeds up over time<small>tap buffs: +life · slow-down · auto-repair</small></div><div class="arrow"></div><div class="node dec">0 lives?</div><div class="arrow"></div><div class="branch"><div><span class="lbl">Yes</span><div class="node end">Game over<small>final score</small></div></div><div><span class="lbl">No</span><div class="node ">Next robot</div></div></div><div class="loop">↺ Next robot</div></div></section><section><h2>Designing for mobile</h2><p>The game jam prototype was a PC game with a single part screen, played with the mouse. For the mobile version we redesigned the layout around how people hold a phone:</p>
 <ul>
 <li><b>Two part screens, one on each side:</b> the player can tap parts with both thumbs while holding the phone in landscape, instead of moving one cursor across the whole screen.</li>
 <li><b>Horizontal layout:</b> landscape gives the conveyor belt enough width for robots to stay readable even at high speed.</li>

@@ -47,6 +47,18 @@ td.high,.legend .high{background:#7f1d1d;color:#fecaca}td.medium,.legend .medium
 .cb{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;position:relative}.cb i{display:block;width:100%;background:var(--accent2);border-radius:4px 4px 0 0}
 .cb b{font-size:.7rem;color:var(--muted);order:-1;margin-bottom:4px}.cb span{font-size:.75rem;color:var(--muted);margin-top:4px}
 .chart .bar{grid-template-columns:150px 1fr 100px}
+.flow{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:24px 16px;margin:18px 0;display:flex;flex-direction:column;align-items:center;gap:0}
+.flow .ft{font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:14px}
+.node{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:10px 16px;text-align:center;font-size:.92rem;max-width:340px;color:var(--text)}
+.node small{display:block;color:var(--muted);font-size:.78rem;margin-top:2px}
+.node.start{border-color:var(--accent);color:var(--accent);font-weight:600}
+.node.dec{border:1px dashed var(--accent2);color:var(--accent2);font-weight:600}
+.node.good{border-color:#4ade80;color:#bbf7d0}.node.bad{border-color:#f87171;color:#fecaca}.node.end{border-color:#fbbf24;color:#fde68a;font-weight:600}
+.arrow{width:2px;height:22px;background:var(--border);position:relative;margin:2px 0 6px}.arrow::after{content:"";position:absolute;bottom:-5px;left:-4px;border:5px solid transparent;border-top-color:var(--border)}
+.branch{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;width:100%}
+.branch>div{display:flex;flex-direction:column;align-items:center;flex:1;min-width:140px;max-width:280px}
+.lbl{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:4px}
+.loop{margin-top:6px;font-size:.85rem;color:var(--accent);border:1px solid var(--accent);border-radius:99px;padding:4px 14px}
 footer{padding:30px 0;text-align:center;color:var(--muted);font-size:.85rem;border-top:1px solid var(--border)}</style></head><body>
 <nav><div class="wrap"><a class="logo" href="../index.html">mark<span>.herdt</span>()</a><a href="../index.html#projects">← Back to all games</a></div></nav>
 <main class="wrap">
@@ -57,7 +69,7 @@ footer{padding:30px 0;text-align:center;color:var(--muted);font-size:.85rem;bord
 <section><h2>Core loop</h2><p>Each player has their own standard deck of playing cards (clubs, hearts, spades and diamonds). A random card starts in the center. On your turn you can play a card if it has the <b>same suit</b> as the center card, or a rank <b>one higher or one lower</b>.</p>
 <p>Only the second option scores: a card that is one rank above or below the center card earns its rank as points (Hearts 7 = 7 points), plus any active multipliers. A card that only matches the suit scores nothing, but its effect still triggers. So every turn you choose between <b>scoring now</b> and <b>using an effect or getting rid of a card</b>.</p>
 <p>The match ends when someone plays their last card, but <b>the winner is the player with the most points</b>, not the first one to empty their hand.</p>
-<p>That creates the central tension of every match: do I keep playing cards to build my score, or race to empty my hand and end the match while I'm ahead?</p></section><section><h2>Cards &amp; the Rogue Deck</h2><h3>Card effects</h3>
+<p>That creates the central tension of every match: do I keep playing cards to build my score, or race to empty my hand and end the match while I'm ahead?</p><div class="flow"><div class="ft">Core loop: one turn</div><div class="node start">Start of turn<small>3 Rogue effects are offered</small></div><div class="arrow"></div><div class="node dec">Buy a Rogue effect?</div><div class="arrow"></div><div class="branch"><div><span class="lbl">Yes</span><div class="node ">Pay slot cost<small>10 → 5,000 points</small></div></div><div><span class="lbl">No</span><div class="node ">Save points<small>wait for a better offer</small></div></div></div><div class="arrow"></div><div class="node ">Play a card<small>must match suit or rank ±1</small></div><div class="arrow"></div><div class="branch"><div><span class="lbl">Rank ±1</span><div class="node good">Score points<small>rank + multipliers</small></div></div><div><span class="lbl">Suit only</span><div class="node bad">No points<small>effect still triggers</small></div></div></div><div class="arrow"></div><div class="node ">Card effect resolves</div><div class="arrow"></div><div class="node dec">Hand empty?</div><div class="arrow"></div><div class="branch"><div><span class="lbl">Yes</span><div class="node end">Match ends<small>most points wins</small></div></div><div><span class="lbl">No</span><div class="node ">Next player</div></div></div><div class="loop">↺ Next turn</div></div></section><section><h2>Cards &amp; the Rogue Deck</h2><h3>Card effects</h3>
 <p>Every card has an effect that triggers when it's played, for example:</p>
 <ul><li>Opponents draw X cards</li><li>Opponents reveal their hand for X turns</li><li>This card gets a point multiplier</li></ul>
 <p>Choosing <i>when</i> to play which card is a scoring decision as well as a tactical one.</p>
