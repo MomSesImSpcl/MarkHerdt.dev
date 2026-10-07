@@ -139,22 +139,24 @@ footer{padding:30px 0;text-align:center;color:var(--muted);font-size:.85rem;bord
 <p>Most of these effects also sit at Epic and Legendary, so their low drop rates make it unlikely that a player holds a full combo. It is still possible to get these combinations, and that's on purpose. In playtests, the rare runs where I pulled several of the strongest cards were some of the most fun matches: a once-in-a-while power spike is part of the roguelike appeal.</p>
 <p><a class="btn" href="https://docs.google.com/spreadsheets/d/1dw4X00niFlxCuj96TsYGd5FnsYzix9_52m8x8lmlegU/edit?usp=sharing" target="_blank" rel="noopener">Open balancing spreadsheet (Google Sheets)</a></p>
 </section><section><h2>Balancing results</h2>
-<p>To check the balance with real data, I logged 10 matches each with 2 and 4 players and compared them with the model in the <a href="https://docs.google.com/spreadsheets/d/1dw4X00niFlxCuj96TsYGd5FnsYzix9_52m8x8lmlegU/edit?usp=sharing" target="_blank" rel="noopener">balancing spreadsheet</a>.</p>
+<p>To check the balance with real data, I added an event logger to the game that records every card play, draw, Rogue offer and purchase. I then played 10 matches each with 2 and 4 players and compared the logs with the model in the <a href="https://docs.google.com/spreadsheets/d/1dw4X00niFlxCuj96TsYGd5FnsYzix9_52m8x8lmlegU/edit?usp=sharing" target="_blank" rel="noopener">balancing spreadsheet</a>.</p>
 <table><tr><th></th><th>2 players</th><th>4 players</th></tr>
-<tr><td>Avg turns per player</td><td>20.7</td><td>21.4</td></tr>
-<tr><td>Avg winning score</td><td>385</td><td>516</td></tr>
-<tr><td>Winner points per turn</td><td>18.6</td><td>24.1</td></tr>
-<tr><td>Implied average multiplier</td><td>×3.9</td><td>×5.0</td></tr>
-<tr><td>Score from multipliers &amp; effects</td><td>74%</td><td>80%</td></tr>
-<tr><td>Rogue slots unlocked at winner pace (model)</td><td>5</td><td>6</td></tr>
-<tr><td>Rogue effects that pay back their cost (model)</td><td>14 of 26</td><td>4 of 26</td></tr>
-<tr><td>Avg active Rogue effects (playtests)</td><td>4.5</td><td>5.2</td></tr></table>
+<tr><td>Avg turns per player</td><td>17.4</td><td>19.9</td></tr>
+<tr><td>Avg winning score</td><td>279</td><td>491</td></tr>
+<tr><td>Winner points earned per turn</td><td>24.0</td><td>34.4</td></tr>
+<tr><td>Implied average multiplier</td><td>×4.6</td><td>×6.6</td></tr>
+<tr><td>Points from multipliers &amp; effects</td><td>78%</td><td>85%</td></tr>
+<tr><td>Winner's points spent on Rogue effects</td><td>33%</td><td>28%</td></tr>
+<tr><td>Avg score before a Rogue purchase</td><td>99</td><td>111</td></tr>
+<tr><td>Highest Rogue slot reached</td><td>5</td><td>6</td></tr>
+<tr><td>Rogue effects that pay back their cost (model)</td><td>26 of 26</td><td>14 of 26</td></tr>
+<tr><td>Avg active Rogue effects (winner)</td><td>4.2</td><td>5.0</td></tr></table>
 <h3>What the data shows</h3>
 <ul>
-<li><b>The Rogue system drives the score.</b> Without multipliers, an average turn is worth about 5 points. Winners score 18–24 per turn, so roughly 75–80% of a winning score comes from multipliers and effects, exactly the role the Rogue Deck was designed for.</li>
-<li><b>The unlock thresholds set the ceiling.</b> At a winner's scoring pace, slot 5 opens around turn 13 and slot 6 only at the very end of a match, if at all. Players in the playtests ended with 4.5 and 5.2 effects, just below that ceiling, since every purchase also slows their score down.</li>
-<li><b>Cheap, broad effects are the best value.</b> Bought mid-match, tempo effects and multipliers for all cards or one color earn back their cost in 2-player matches, while Rare-and-up single-suit multipliers fall just short: their multiplier grows by +1 per rarity, but their price grows by 10% of your score. In 4-player matches scores are higher, so purchases cost more and only the strongest effects pay back. This is the next thing I'm verifying with detailed per-event playtest logs.</li>
-<li><b>The late slots are a jackpot, not a goal.</b> Slot 6 needs 500 points, more than an average winning score, so slots 6–10 only open in exceptional runs. That keeps the occasional huge power spike possible without it becoming the norm.</li>
+<li><b>The Rogue system drives the score.</b> Without multipliers, an average turn is worth about 5 points. Winners earn 24–34 points per turn, so roughly 80% of their points come from multipliers and effects, exactly the role the Rogue Deck was designed for.</li>
+<li><b>Getting stronger has a real price.</b> Winners spent about a third of everything they earned on Rogue effects. Purchases happen early, around turn 7, at a score of about 100, so each one costs around 30 points: a noticeable dent, but one that pays off over the rest of the match.</li>
+<li><b>The unlock thresholds set the ceiling.</b> No 2-player match got past slot 5, and slot 6 (500 points) was only reached in the highest-scoring 4-player matches. Late slots stay a rare jackpot instead of a goal.</li>
+<li><b>Players skip Commons, and the data points at the next tweak.</b> Only 6 of 266 purchases were Common, although Commons make up half of all offers. In 2-player matches every Rogue effect pays back its cost, but in 4-player matches scores are higher, so the score-based price grows faster than the bonus of Rare-and-up single-suit multipliers. Those are the next candidates for a buff or a lower price.</li>
 </ul>
 </section>
 <section><h2>Challenges &amp; solutions</h2><p><b>Keeping combos exciting without letting them break the game.</b> The fun of a roguelike comes from powerful synergies, but in a competitive match one dominant combination ruins it for everyone else. The tools against this are Rogue cards that cost points (so getting strong means falling behind first), the limit of one activation per turn and 10 per match, and reshuffling the Rogue Deck every turn so no player can rely on a fixed combo.</p></section>
