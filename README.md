@@ -13,7 +13,7 @@ The site showcases my games, the design behind them, my Unity tools and my CV.
 | [Rogue Deck](https://markherdt.dev/games/rogue-deck.html) | Card and Rogue effect catalogs, rarity math, combo matrix, economy and multiplier stacking |
 | [Queue Connect](https://markherdt.dev/games/queue-connect.html) | From Global Game Jam 2020 prototype to mobile release |
 
-Also included: a [balancing spreadsheet](https://docs.google.com/spreadsheets/d/1dw4X00niFlxCuj96TsYGd5FnsYzix9_52m8x8lmlegU/edit?usp=sharing) for Rogue Deck and my [CV](https://markherdt.dev/Mark_Herdt_CV.pdf).
+Also included: a [Balancing Spreadsheet](https://docs.google.com/spreadsheets/d/1dw4X00niFlxCuj96TsYGd5FnsYzix9_52m8x8lmlegU/edit?usp=sharing) and a [LiveOps Economy Model](https://docs.google.com/spreadsheets/d/1jcOW8E9k-_3IaDA458qoxKh_49oPYQluWO2pk144yH0/edit?usp=sharing) for Rogue Deck and my [CV](https://markherdt.dev/Mark_Herdt_CV.pdf).
 
 ## Contact
 
