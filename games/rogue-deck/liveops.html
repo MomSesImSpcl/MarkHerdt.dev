@@ -1,0 +1,307 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="referrer" content="strict-origin-when-cross-origin"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rogue Deck – LiveOps &amp; Economy | Mark Herdt</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0e1116;--surface:#161b22;--surface2:#1f2630;--text:#e6edf3;--muted:#9aa5b1;--accent:#5eead4;--accent2:#a78bfa;--border:#2a323d}
+body{background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif;line-height:1.7}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px}
+nav{border-bottom:1px solid var(--border)}nav .wrap{height:60px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:"JetBrains Mono",monospace;color:var(--text)}.logo span{color:var(--accent)}
+header{padding:60px 0 30px}.tag{font-family:"JetBrains Mono",monospace;color:var(--accent);font-size:.9rem}
+h1{font-size:clamp(2.2rem,5vw,3.2rem);line-height:1.1;margin:10px 0 14px}
+.lead{color:var(--muted);font-size:1.1rem}
+.video{aspect-ratio:16/9;border-radius:14px;overflow:hidden;border:1px solid var(--border);margin:30px 0}
+.video iframe{width:100%;height:100%;border:0}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:20px}
+.fact{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px}
+.fact b{display:block;font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;color:var(--accent2)}
+section{padding:34px 0;border-top:1px solid var(--border)}
+h2{font-size:1.5rem;margin-bottom:12px}h3{font-size:1.1rem;margin:18px 0 6px}li{margin-bottom:6px}p+p{margin-top:10px}p,li{color:#c9d3dc}ul{margin-left:20px}
+.todo{border:1px dashed var(--accent2);border-radius:10px;padding:14px;color:var(--muted);font-style:italic;margin-top:10px}
+.links{display:flex;flex-wrap:wrap;gap:12px;margin-top:10px}
+.btn{display:inline-block;padding:10px 18px;border-radius:10px;border:1px solid var(--border);background:var(--surface);color:var(--text);font-weight:600}
+.btn:hover{border-color:var(--accent);text-decoration:none}
+table{width:100%;border-collapse:collapse;margin:12px 0 6px;font-size:.93rem}th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--border)}th{color:var(--muted);font-weight:600;font-size:.8rem;text-transform:uppercase;letter-spacing:.05em}td{color:#c9d3dc}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:8px}
+.chart{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;margin:12px 0}
+.bar{display:grid;grid-template-columns:90px 1fr 56px;align-items:center;gap:10px;margin:8px 0}.bl{font-size:.9rem}.bv{text-align:right;font-variant-numeric:tabular-nums;color:var(--muted)}
+.bt{background:var(--surface2);border-radius:6px;height:14px;overflow:hidden}.bf{height:100%;border-radius:6px}
+@media(max-width:600px){table{display:block;overflow-x:auto;white-space:nowrap}}
+.note{font-size:.85rem;color:var(--muted);font-style:italic}
+.cat{margin:18px 0}.cat h4{font-size:1rem;margin-bottom:8px}.cat h4 span{color:var(--muted);font-weight:400}
+.fx{display:grid;grid-template-columns:230px 1fr auto;gap:12px;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);font-size:.92rem}
+.fxn{font-weight:600}.fxd{color:var(--muted)}.rc{display:inline-block;border:1px solid;border-radius:99px;padding:1px 8px;font-size:.75rem;margin:2px}
+@media(max-width:700px){.fx{grid-template-columns:1fr}}
+.scale{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px 16px;margin-top:12px;overflow-x:auto}
+.srow{display:grid;grid-template-columns:220px repeat(4,1fr);gap:10px;align-items:center;padding:7px 0;min-width:560px}
+.shead span{font-size:.75rem;text-transform:uppercase;letter-spacing:.06em}
+.sn{font-size:.9rem}.sn em{display:block;font-style:normal;color:var(--muted);font-size:.75rem}
+.srow span{position:relative}.srow i{display:block;height:18px;border-radius:4px;opacity:.85}.srow b{position:absolute;left:6px;top:0;font-size:.75rem;color:#0e1116;line-height:18px}.na{color:var(--muted)}
+.mxw{overflow-x:auto;margin:14px 0}.mx{min-width:640px;font-size:.82rem}.mx th{font-size:.72rem;text-transform:none;letter-spacing:0;vertical-align:bottom}
+.mx td{text-align:center;font-weight:600;border:2px solid var(--bg)}
+td.high,.legend .high{background:#7f1d1d;color:#fecaca}td.medium,.legend .medium{background:#78350f;color:#fde68a}td.low,.legend .low{background:#14532d;color:#bbf7d0}td.d{color:var(--muted)}
+.legend span{padding:2px 8px;border-radius:6px;font-size:.8rem;font-weight:600}.legend{font-size:.85rem;color:var(--muted)}
+.costchart{display:grid;grid-template-columns:repeat(10,1fr);gap:8px;align-items:end;height:200px;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:30px 14px 10px;margin-top:12px}
+.cb{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;position:relative}.cb i{display:block;width:100%;background:var(--accent2);border-radius:4px 4px 0 0}
+.cb b{font-size:.7rem;color:var(--muted);order:-1;margin-bottom:4px}.cb span{font-size:.75rem;color:var(--muted);margin-top:4px}
+.chart .bar{grid-template-columns:150px 1fr 100px}
+.flow{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:24px 16px;margin:18px 0;display:flex;flex-direction:column;align-items:center;gap:0}
+.flow .ft{font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:14px}
+.node{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:10px 16px;text-align:center;font-size:.92rem;max-width:340px;color:var(--text)}
+.node small{display:block;color:var(--muted);font-size:.78rem;margin-top:2px}
+.node.start{border-color:var(--accent);color:var(--accent);font-weight:600}
+.node.dec{border:1px dashed var(--accent2);color:var(--accent2);font-weight:600}
+.node.good{border-color:#4ade80;color:#bbf7d0}.node.bad{border-color:#f87171;color:#fecaca}.node.end{border-color:#fbbf24;color:#fde68a;font-weight:600}
+.arrow{width:2px;height:22px;background:var(--border);position:relative;margin:2px 0 6px}.arrow::after{content:"";position:absolute;bottom:-5px;left:-4px;border:5px solid transparent;border-top-color:var(--border)}
+.branch{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;width:100%}
+.branch>div{display:flex;flex-direction:column;align-items:center;flex:1;min-width:140px;max-width:280px}
+.lbl{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:4px}
+.loop{margin-top:6px;font-size:.85rem;color:var(--accent);border:1px solid var(--accent);border-radius:99px;padding:4px 14px}
+footer{padding:30px 0;text-align:center;color:var(--muted);font-size:.85rem;border-top:1px solid var(--border)}.iter{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px 18px;margin:14px 0}
+.iter h3{margin:0 0 10px}.iter dl{display:grid;grid-template-columns:110px 1fr;gap:6px 14px;margin:0}
+.iter dt{font-family:"JetBrains Mono",monospace;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;color:var(--accent2);padding-top:3px}
+.iter dd{margin:0;color:#c9d3dc}.iter.rej{border-style:dashed}.iter.next{border-color:var(--accent)}.iter.next dt{color:var(--accent)}
+@media(max-width:600px){.iter dl{grid-template-columns:1fr}.iter dt{padding-top:8px}}
+</style><style>
+.pill{display:inline-block;font-family:"JetBrains Mono",monospace;font-size:.72rem;padding:2px 9px;border-radius:99px;border:1px solid var(--accent2);color:var(--accent2);margin-right:6px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:14px 0}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 16px}
+.card h4{font-size:.95rem;margin-bottom:4px}.card p{font-size:.9rem;color:var(--muted)}
+.ladder{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:6px 16px;margin:14px 0}
+.rung{display:grid;grid-template-columns:110px 1fr 1.1fr;gap:14px;padding:10px 0;border-bottom:1px solid var(--border);font-size:.92rem;align-items:baseline}
+.rung:last-child{border:0}.rung b{font-family:"JetBrains Mono",monospace;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;color:var(--accent)}
+.rung span{color:var(--muted)}
+@media(max-width:640px){.rung{grid-template-columns:1fr}}
+.flowx{display:grid;grid-template-columns:1fr 70px 1fr 70px 1fr;align-items:center;gap:0;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;margin:14px 0}
+.col h5{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:6px;text-align:center}
+.box{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:7px 10px;margin:6px 0;font-size:.85rem;text-align:center}
+.box.g{border-color:var(--accent);color:var(--accent)}.box.p{border-color:var(--accent2);color:var(--accent2)}.box.y{border-color:#fbbf24;color:#fde68a}
+.arr{text-align:center;color:var(--muted);font-size:1.4rem}
+@media(max-width:700px){.flowx{grid-template-columns:1fr}.arr{transform:rotate(90deg)}}
+.cal{overflow-x:auto;margin:14px 0}
+.calg{display:grid;grid-template-columns:150px repeat(28,minmax(14px,1fr));gap:3px 2px;min-width:640px;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px;font-size:.8rem;align-items:center}
+.calg .wk{font-family:"JetBrains Mono",monospace;font-size:.7rem;color:var(--muted);text-align:center}
+.calg .lab{color:var(--text);padding-right:8px}
+.calg i{display:block;height:16px;border-radius:4px}
+.stack{display:grid;grid-template-columns:120px 1fr 52px;gap:10px;align-items:center;margin:8px 0;font-size:.88rem}
+.stack .st{display:flex;height:18px;border-radius:5px;overflow:hidden;background:var(--surface2)}
+.stack .st span{display:block;height:100%}
+.stack .v{text-align:right;font-variant-numeric:tabular-nums;color:var(--muted)}
+.key{display:flex;flex-wrap:wrap;gap:14px;font-size:.8rem;color:var(--muted);margin-top:8px}.key i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:middle}
+.spec{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px 20px;margin:14px 0}
+.spec h3:first-child{margin-top:0}.spec code{font-family:"JetBrains Mono",monospace;font-size:.82rem;background:var(--surface2);padding:1px 6px;border-radius:4px;color:var(--accent)}
+.disclaimer{border:1px dashed var(--accent2);border-radius:10px;padding:12px 14px;color:var(--muted);font-size:.9rem;margin:6px 0 20px}
+svg text{font-family:Inter,system-ui,sans-serif}
+</style></head><body>
+<nav><div class="wrap"><a class="logo" href="../../index.html">mark<span>.herdt</span>()</a><a href="index.html">← Rogue Deck design</a></div></nav>
+<main class="wrap">
+<header><p class="tag">// LiveOps · Economy · Progression · Design case study</p><h1>Rogue Deck: LiveOps &amp; Economy</h1>
+<p class="lead">How I would run <a href="index.html">Rogue Deck</a> as a free-to-play live game: what players collect, how they earn it, what keeps them coming back each day, week and season, and how the economy holds together.</p></header>
+<div class="disclaimer">This is a design plan for features on my backlog, not a shipped system. Prices and reward values are assumptions, tuned in an <a href="https://docs.google.com/spreadsheets/d/1jcOW8E9k-_3IaDA458qoxKh_49oPYQluWO2pk144yH0/edit?usp=sharing" target="_blank" rel="noopener">editable economy model</a>. Rarity weights, effect counts and match length come from the current game.</div>
+<div class="facts"><div class="fact"><b>Model</b>Free-to-play, cosmetic and collection focused</div><div class="fact"><b>Free packs</b>~1–2 per active day</div><div class="fact"><b>Battle pass</b>50 levels, finishable by a regular player</div><div class="fact"><b>Collection</b>61 effects, 312 artworks</div><div class="fact"><b>Match length</b>~15 minutes</div></div>
+
+<section><h2>Design pillars</h2>
+<div class="cards">
+<div class="card"><h4>1. Effects are earned fast, art is the long chase</h4><p>A regular free player owns 84% of all effects after two months. The long-term goal is collecting art styles, which never change how a card plays.</p></div>
+<div class="card"><h4>2. Every mode has a fair option</h4><p>Random and Draft matches ignore your collection completely. Only Normal mode uses your own decks.</p></div>
+<div class="card"><h4>3. Money speeds things up, it doesn't unlock anything</h4><p>Every card and effect can be earned for free. Paid offers save time or add cosmetics.</p></div>
+<div class="card"><h4>4. Give players a reason for every time frame</h4><p>Something to do in one match, one session, one week and one season, so there's always a next goal.</p></div>
+</div></section>
+
+<section><h2>Player goals across time scales</h2>
+<div class="ladder">
+<div class="rung"><b>One turn</b><div>Buy a Rogue card or save points</div><span>Mastery: the core in-match decision</span></div>
+<div class="rung"><b>One match</b><div>Win, earn gold, progress quests</div><span>Competence and a steady drip of rewards</span></div>
+<div class="rung"><b>One session</b><div>Daily free pack, 3 of 5 daily quests</div><span>A short, clear checklist for every login</span></div>
+<div class="rung"><b>One week</b><div>Weekly quests, this week's rule modifier, weekend Draft cup</div><span>Variety: the same game with new rules each week</span></div>
+<div class="rung"><b>One season (4 weeks)</b><div>Battle pass, monthly quests, login track, special event</div><span>Commitment with visible progress</span></div>
+<div class="rung"><b>Long term</b><div>Collection milestones, art styles, account milestones, loyalty cosmetics</div><span>Collecting and identity: showing what you've earned</span></div>
+</div></section>
+
+<section><h2>Collection</h2>
+<p>Every card has <b>illustrations in four art styles</b>: Default, Holo, Full Art and Alt Art. This applies to playing cards and Rogue cards alike. A card in a booster pack has a random effect and a random art style. The art style is purely cosmetic and never changes the effect.</p>
+<table><tr><th>Art style</th><th>Chance per card</th><th>Per pack (5 cards)</th><th>Where else to get it</th></tr>
+<tr><td>Default</td><td>90%</td><td>4.5</td><td>Crafting, starter decks</td></tr>
+<tr><td>Holo</td><td>8.9%</td><td>0.45</td><td>Art-upgrade token (events)</td></tr>
+<tr><td>Full Art</td><td>1%</td><td>1 in 20 packs</td><td>Rare art-upgrade token (events)</td></tr>
+<tr><td>Alt Art</td><td>0.1%</td><td>1 in 200 packs</td><td>Packs only, plus new event art over time</td></tr></table>
+<p>Effect rarity uses the same 8 / 4 / 2 / 1 weights as the in-match Rogue offers, so a pack averages one Legendary every three packs. Each pack contains <b>1 Rogue card + 4 playing cards</b>.</p>
+<h3>Crafting keeps packs relevant</h3>
+<p>Duplicates can be dismantled into card fragments, and any card can be crafted. <b>Crafted cards always get the Default art.</b> Players can complete a deck faster, but rare art only comes from packs and events.</p>
+<table><tr><th>Rarity</th><th>Dismantle (fragments)</th><th>Craft (fragments)</th><th>Dismantles per craft</th></tr>
+<tr><td>Common</td><td>2</td><td>10</td><td>5</td></tr><tr><td>Rare</td><td>15</td><td>75</td><td>5</td></tr><tr><td>Epic</td><td>50</td><td>250</td><td>5</td></tr><tr><td>Legendary</td><td>200</td><td>1,000</td><td>5</td></tr></table>
+<p class="note">Dismantling a Holo, Full Art or Alt Art card returns 2×, 4× or 8× the materials, so rare duplicates still feel valuable. <b>Nerf refunds:</b> if a card is nerfed, dismantling it returns its full craft cost instead.</p>
+<h3>Collection milestones</h3>
+<ul><li>Own X unique cards (repeating tiers)</li><li>Own every effect in a category (Scoring, Tempo, Hand…)</li><li>Own every rarity of an effect, e.g. Score Multiplier ×2 to ×5</li><li>Own every art style of one card (Alt Art and event art excluded)</li></ul>
+</section>
+
+<section><h2>Economy</h2>
+<p>The economy uses four currencies, each with a clear job:</p>
+<div class="flowx">
+<div class="col"><h5>Earned from</h5><div class="box">Matches (capped per day)</div><div class="box">Daily, weekly, monthly quests</div><div class="box">Battle pass, events, milestones</div><div class="box p">Real money</div></div>
+<div class="arr">→</div>
+<div class="col"><h5>Currencies</h5><div class="box y">Gold <small>(soft)</small></div><div class="box p">Gems <small>(premium)</small></div><div class="box g">Crafting materials</div><div class="box">Event tokens</div></div>
+<div class="arr">→</div>
+<div class="col"><h5>Spent on</h5><div class="box">Booster packs</div><div class="box">Cosmetics</div><div class="box">Crafting cards</div><div class="box">Quest rerolls</div><div class="box">Event shop, art-upgrade tokens</div></div>
+</div>
+<ul>
+<li><b>Gold</b> comes from matches and quests, and buys packs (150 gold), cosmetics and quest rerolls. Match gold is <b>capped at 30 per day</b> (about 4 matches). That stops bots from farming and keeps quests and gems relevant.</li>
+<li><b>Gems</b> are bought with real money and buy packs (100 gems), cosmetics and bundles. They are never needed to get a card.</li>
+<li><b>Card fragments</b> (crafting materials) come only from dismantling duplicates and from rewards, and are spent only on crafting.</li>
+<li><b>Event tokens</b> exist only during an event and buy from that event's shop, including art-upgrade tokens.</li>
+</ul>
+<h3>Free pack budget</h3>
+<p>Target: <b>1–2 free packs per active day</b>, around 30 per month for a regular player. Where those packs come from, per month:</p>
+<div class="chart"><div class="stack"><span>Casual</span><div class="st"><span style="width:10.0%;background:#5eead4"></span><span style="width:2.7%;background:#fbbf24"></span><span style="width:2.2%;background:#a78bfa"></span></div><span class="v">15</span></div><div class="stack"><span>Regular</span><div class="st"><span style="width:18.0%;background:#5eead4"></span><span style="width:7.6%;background:#fbbf24"></span><span style="width:5.2%;background:#a78bfa"></span></div><span class="v">31</span></div><div class="stack"><span>Engaged</span><div class="st"><span style="width:26.0%;background:#5eead4"></span><span style="width:13.9%;background:#fbbf24"></span><span style="width:9.0%;background:#a78bfa"></span></div><span class="v">49</span></div><div class="stack"><span>Hardcore</span><div class="st"><span style="width:30.0%;background:#5eead4"></span><span style="width:16.4%;background:#fbbf24"></span><span style="width:9.0%;background:#a78bfa"></span></div><span class="v">55</span></div><div class="stack"><span>Engaged + $29.98</span><div class="st"><span style="width:26.0%;background:#5eead4"></span><span style="width:13.9%;background:#fbbf24"></span><span style="width:9.0%;background:#a78bfa"></span><span style="width:12.0%;background:#f472b6"></span><span style="width:30.0%;background:#60a5fa"></span></div><span class="v">91</span></div>
+<div class="key"><span><i style="background:#5eead4"></i>Daily free pack</span><span><i style="background:#fbbf24"></i>Bought with earned gold</span><span><i style="background:#a78bfa"></i>Quest &amp; pass rewards</span><span><i style="background:#f472b6"></i>Premium battle pass</span><span><i style="background:#60a5fa"></i>Daily Packs (30)</span></div></div>
+<table><tr><th>Profile</th><th>Active days / month</th><th>Matches / day</th><th>Hours / month</th><th>Free packs / month</th></tr>
+<tr><td>Casual</td><td>10</td><td>2</td><td>5</td><td>15</td></tr>
+<tr><td>Regular</td><td>18</td><td>3</td><td>13.5</td><td>31</td></tr>
+<tr><td>Engaged</td><td>26</td><td>6</td><td>39</td><td>49</td></tr>
+<tr><td>Hardcore</td><td>30</td><td>12</td><td>90</td><td>55</td></tr></table>
+<p><b>What the model shows:</b> the daily cap does its job. The hardcore profile plays 2.3× as many hours as the engaged one but gets only 13% more packs. Logging in regularly is rewarded much more than grinding, which is better for player health and makes botting pointless.</p>
+<h3>Collection progress</h3>
+<p>A Monte Carlo simulation (300 runs per profile) opens these packs month by month:</p>
+<div class="chart"><div class="ct" style="font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)">All 61 effects owned</div><svg viewBox="0 0 620 250" width="100%" role="img" aria-label="Effect collection over 6 months"><line x1="44" x2="470" y1="216.0" y2="216.0" stroke="#2a323d"/><text x="36" y="220.0" fill="#9aa5b1" font-size="11" text-anchor="end">0%</text><line x1="44" x2="470" y1="167.0" y2="167.0" stroke="#2a323d"/><text x="36" y="171.0" fill="#9aa5b1" font-size="11" text-anchor="end">25%</text><line x1="44" x2="470" y1="118.0" y2="118.0" stroke="#2a323d"/><text x="36" y="122.0" fill="#9aa5b1" font-size="11" text-anchor="end">50%</text><line x1="44" x2="470" y1="69.0" y2="69.0" stroke="#2a323d"/><text x="36" y="73.0" fill="#9aa5b1" font-size="11" text-anchor="end">75%</text><line x1="44" x2="470" y1="20.0" y2="20.0" stroke="#2a323d"/><text x="36" y="24.0" fill="#9aa5b1" font-size="11" text-anchor="end">100%</text><text x="44.0" y="238" fill="#9aa5b1" font-size="11" text-anchor="middle">M1</text><text x="129.2" y="238" fill="#9aa5b1" font-size="11" text-anchor="middle">M2</text><text x="214.4" y="238" fill="#9aa5b1" font-size="11" text-anchor="middle">M3</text><text x="299.6" y="238" fill="#9aa5b1" font-size="11" text-anchor="middle">M4</text><text x="384.8" y="238" fill="#9aa5b1" font-size="11" text-anchor="middle">M5</text><text x="470.0" y="238" fill="#9aa5b1" font-size="11" text-anchor="middle">M6</text><polyline points="44.0,112.1 129.2,78.8 214.4,61.2 299.6,51.4 384.8,45.5 470.0,41.6" fill="none" stroke="#9aa5b1" stroke-width="2.5"/><circle cx="44.0" cy="112.1" r="3" fill="#9aa5b1"/><circle cx="129.2" cy="78.8" r="3" fill="#9aa5b1"/><circle cx="214.4" cy="61.2" r="3" fill="#9aa5b1"/><circle cx="299.6" cy="51.4" r="3" fill="#9aa5b1"/><circle cx="384.8" cy="45.5" r="3" fill="#9aa5b1"/><circle cx="470.0" cy="41.6" r="3" fill="#9aa5b1"/><polyline points="44.0,76.8 129.2,51.4 214.4,39.6 299.6,33.7 384.8,29.8 470.0,27.8" fill="none" stroke="#a78bfa" stroke-width="2.5"/><circle cx="44.0" cy="76.8" r="3" fill="#a78bfa"/><circle cx="129.2" cy="51.4" r="3" fill="#a78bfa"/><circle cx="214.4" cy="39.6" r="3" fill="#a78bfa"/><circle cx="299.6" cy="33.7" r="3" fill="#a78bfa"/><circle cx="384.8" cy="29.8" r="3" fill="#a78bfa"/><circle cx="470.0" cy="27.8" r="3" fill="#a78bfa"/><polyline points="44.0,59.2 129.2,39.6 214.4,31.8 299.6,27.8 384.8,25.9 470.0,23.9" fill="none" stroke="#5eead4" stroke-width="2.5"/><circle cx="44.0" cy="59.2" r="3" fill="#5eead4"/><circle cx="129.2" cy="39.6" r="3" fill="#5eead4"/><circle cx="214.4" cy="31.8" r="3" fill="#5eead4"/><circle cx="299.6" cy="27.8" r="3" fill="#5eead4"/><circle cx="384.8" cy="25.9" r="3" fill="#5eead4"/><circle cx="470.0" cy="23.9" r="3" fill="#5eead4"/><polyline points="44.0,39.6 129.2,27.8 214.4,23.9 299.6,22.0 384.8,22.0 470.0,20.0" fill="none" stroke="#f472b6" stroke-width="2.5"/><circle cx="44.0" cy="39.6" r="3" fill="#f472b6"/><circle cx="129.2" cy="27.8" r="3" fill="#f472b6"/><circle cx="214.4" cy="23.9" r="3" fill="#f472b6"/><circle cx="299.6" cy="22.0" r="3" fill="#f472b6"/><circle cx="384.8" cy="22.0" r="3" fill="#f472b6"/><circle cx="470.0" cy="20.0" r="3" fill="#f472b6"/><text x="478" y="24.0" fill="#f472b6" font-size="11.5">Engaged + paid · 100%</text><text x="478" y="38.0" fill="#5eead4" font-size="11.5">Engaged · 98%</text><text x="478" y="52.0" fill="#a78bfa" font-size="11.5">Regular · 96%</text><text x="478" y="66.0" fill="#9aa5b1" font-size="11.5">Casual · 89%</text></svg></div>
+<div class="chart"><div class="ct" style="font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)">All 312 artworks owned</div><svg viewBox="0 0 620 250" width="100%" role="img" aria-label="Artwork collection over 6 months"><line x1="44" x2="470" y1="216.0" y2="216.0" stroke="#2a323d"/><text x="36" y="220.0" fill="#9aa5b1" font-size="11" text-anchor="end">0%</text><line x1="44" x2="470" y1="167.0" y2="167.0" stroke="#2a323d"/><text x="36" y="171.0" fill="#9aa5b1" font-size="11" text-anchor="end">25%</text><line x1="44" x2="470" y1="118.0" y2="118.0" stroke="#2a323d"/><text x="36" y="122.0" fill="#9aa5b1" font-size="11" text-anchor="end">50%</text><line x1="44" x2="470" y1="69.0" y2="69.0" stroke="#2a323d"/><text x="36" y="73.0" fill="#9aa5b1" font-size="11" text-anchor="end">75%</text><line x1="44" x2="470" y1="20.0" y2="20.0" stroke="#2a323d"/><text x="36" y="24.0" fill="#9aa5b1" font-size="11" text-anchor="end">100%</text><text x="44.0" y="238" fill="#9aa5b1" font-size="11" text-anchor="middle">M1</text><text x="129.2" y="238" fill="#9aa5b1" font-size="11" text-anchor="middle">M2</text><text x="214.4" y="238" fill="#9aa5b1" font-size="11" text-anchor="middle">M3</text><text x="299.6" y="238" fill="#9aa5b1" font-size="11" text-anchor="middle">M4</text><text x="384.8" y="238" fill="#9aa5b1" font-size="11" text-anchor="middle">M5</text><text x="470.0" y="238" fill="#9aa5b1" font-size="11" text-anchor="middle">M6</text><polyline points="44.0,186.6 129.2,170.9 214.4,163.1 299.6,157.2 384.8,153.3 470.0,149.4" fill="none" stroke="#9aa5b1" stroke-width="2.5"/><circle cx="44.0" cy="186.6" r="3" fill="#9aa5b1"/><circle cx="129.2" cy="170.9" r="3" fill="#9aa5b1"/><circle cx="214.4" cy="163.1" r="3" fill="#9aa5b1"/><circle cx="299.6" cy="157.2" r="3" fill="#9aa5b1"/><circle cx="384.8" cy="153.3" r="3" fill="#9aa5b1"/><circle cx="470.0" cy="149.4" r="3" fill="#9aa5b1"/><polyline points="44.0,170.9 129.2,157.2 214.4,149.4 299.6,143.5 384.8,137.6 470.0,133.7" fill="none" stroke="#a78bfa" stroke-width="2.5"/><circle cx="44.0" cy="170.9" r="3" fill="#a78bfa"/><circle cx="129.2" cy="157.2" r="3" fill="#a78bfa"/><circle cx="214.4" cy="149.4" r="3" fill="#a78bfa"/><circle cx="299.6" cy="143.5" r="3" fill="#a78bfa"/><circle cx="384.8" cy="137.6" r="3" fill="#a78bfa"/><circle cx="470.0" cy="133.7" r="3" fill="#a78bfa"/><polyline points="44.0,161.1 129.2,147.4 214.4,139.6 299.6,131.7 384.8,125.8 470.0,121.9" fill="none" stroke="#5eead4" stroke-width="2.5"/><circle cx="44.0" cy="161.1" r="3" fill="#5eead4"/><circle cx="129.2" cy="147.4" r="3" fill="#5eead4"/><circle cx="214.4" cy="139.6" r="3" fill="#5eead4"/><circle cx="299.6" cy="131.7" r="3" fill="#5eead4"/><circle cx="384.8" cy="125.8" r="3" fill="#5eead4"/><circle cx="470.0" cy="121.9" r="3" fill="#5eead4"/><polyline points="44.0,149.4 129.2,133.7 214.4,123.9 299.6,118.0 384.8,112.1 470.0,108.2" fill="none" stroke="#f472b6" stroke-width="2.5"/><circle cx="44.0" cy="149.4" r="3" fill="#f472b6"/><circle cx="129.2" cy="133.7" r="3" fill="#f472b6"/><circle cx="214.4" cy="123.9" r="3" fill="#f472b6"/><circle cx="299.6" cy="118.0" r="3" fill="#f472b6"/><circle cx="384.8" cy="112.1" r="3" fill="#f472b6"/><circle cx="470.0" cy="108.2" r="3" fill="#f472b6"/><text x="478" y="112.2" fill="#f472b6" font-size="11.5">Engaged + paid · 55%</text><text x="478" y="126.2" fill="#5eead4" font-size="11.5">Engaged · 48%</text><text x="478" y="140.2" fill="#a78bfa" font-size="11.5">Regular · 42%</text><text x="478" y="154.2" fill="#9aa5b1" font-size="11.5">Casual · 34%</text></svg></div>
+<ul>
+<li><b>Effects saturate quickly.</b> Every profile except Casual owns 90% or more of all effects by month 3. Competitive power evens out early, which supports pillar 3. This is based on the 61 effects in the game today. New effects will be added during development and as part of LiveOps, which resets this curve with every release and keeps pack openings exciting.</li>
+<li><b>Art keeps going.</b> After six months, even the paying profile owns only 55% of artworks. The long tail is mostly Full Art and Alt Art, and it gets longer with every new art set. That makes it the long-term collecting goal.</li>
+<li><b>Paying speeds things up but doesn't create a gap.</b> At month 6 the paid profile owns 100% of effects versus 98% for the same player on the free path.</li>
+</ul>
+<p><a class="btn" href="https://docs.google.com/spreadsheets/d/1jcOW8E9k-_3IaDA458qoxKh_49oPYQluWO2pk144yH0/edit?usp=sharing" target="_blank" rel="noopener">Open economy model (Google Sheets)</a></p>
+</section>
+
+<section><h2>Match modes</h2>
+<table><tr><th>Mode</th><th>Deck</th><th>Role in the live game</th></tr>
+<tr><td>Normal</td><td>Your own constructed decks</td><td>Where the collection matters; ranked play</td></tr>
+<tr><td>Random</td><td>A random deck for every player</td><td>Quick, fair matches for new and returning players</td></tr>
+<tr><td>Draft</td><td>Pick 1 of 3 cards until the deck is full</td><td>Skill-based mode for the weekend cups; no collection needed</td></tr></table>
+</section>
+
+<section><h2>Season calendar</h2>
+<p>One season is four weeks. The events are designed to <b>feed each other</b> instead of competing for the same session:</p>
+<div class="cal"><div class="calg"><span></span><span class="wk" style="grid-column:span 7">Week 1</span><span class="wk" style="grid-column:span 7">Week 2</span><span class="wk" style="grid-column:span 7">Week 3</span><span class="wk" style="grid-column:span 7">Week 4</span><span class="lab">Battle pass</span><i style="grid-column:span 28;background:#a78bfa"></i><span class="lab">Monthly quests + login track</span><i style="grid-column:span 28;background:#4b5563"></i><span class="lab">Weekly rule modifier</span><i style="grid-column:span 7;background:#5eead4"></i><i style="grid-column:span 7;background:#2dd4bf"></i><i style="grid-column:span 7;background:#5eead4"></i><i style="grid-column:span 7;background:#2dd4bf"></i><span class="lab">Weekend Draft cup</span><span style="grid-column:span 5"></span><i style="grid-column:span 2;background:#fbbf24"></i><span style="grid-column:span 5"></span><i style="grid-column:span 2;background:#fbbf24"></i><span style="grid-column:span 5"></span><i style="grid-column:span 2;background:#fbbf24"></i><span style="grid-column:span 5"></span><i style="grid-column:span 2;background:#fbbf24"></i><span class="lab">Rotating booster pack</span><i style="grid-column:span 14;background:#60a5fa"></i><span style="grid-column:span 14"></span><span class="lab">Special event + reward track</span><span style="grid-column:span 16"></span><i style="grid-column:span 12;background:#f472b6"></i><span class="lab">Event bundle sale</span><span style="grid-column:span 16"></span><i style="grid-column:span 4;background:#fb7185"></i><span style="grid-column:span 8"></span></div></div>
+<ul>
+<li><b>Weekly rule modifiers</b> are limited-time rule changes that reuse existing systems, so they're cheap to produce. Examples: half-price Rogue cards, every player starts with one Legendary, or same-rank cards also score (the <a href="index.html">idea I dropped</a> for the base game works fine as a one-week twist).</li>
+<li><b>The weekly quests point to the modifier</b> ("Win 3 matches this week"), and the <b>rotating booster pack</b> is themed to match. A multiplier pack runs alongside the half-price Rogue week, for example.</li>
+<li><b>Weekend Draft cups</b> award event tokens. During the special event, those tokens also count toward the <b>event reward track</b>, which hands out art-upgrade tokens. The tokens feed the collection milestones.</li>
+<li><b>The event bundle sale</b> runs at the start of the special event, when engagement is highest. Seasonal sales (Christmas, anniversary) add better gem rates.</li>
+</ul>
+</section>
+
+<section><h2>Retention systems</h2>
+<h3>Onboarding: the first hours</h3>
+<ul>
+<li>New players get a <b>complete starter deck</b>. It isn't the best deck, but it's a good one, so the first matches are fun and winnable.</li>
+<li><b>One-time quests</b> pay out generously and introduce each system: open a pack, craft a card, play Draft, change a card back, visit the shop. The shop quest shows both payment options, gold and gems, without forcing a purchase.</li>
+<li>The aim is an early run of fun matches and good cards. Players who enjoy their first hours and feel they own something are more likely to come back on day 2.</li>
+</ul>
+<h3>Daily, weekly and monthly quests</h3>
+<ul>
+<li><b>More quests than required:</b> 5 daily (3 needed), 6 weekly (4 needed), 8 monthly (5 needed). Players pick what fits how they like to play. Finishing all of them gives a small bonus.</li>
+<li><b>Reward per quest, then a bigger finish:</b> weekly and monthly quests pay something for each quest, so progress is never "all or nothing".</li>
+<li><b>Rerolls</b> are specified in full in the feature spec below.</li>
+<li>One daily quest can target a known design problem. "Win a match with 3 Common Rogue effects" directly tests the <a href="index.html">underbought-Commons finding</a> from the playtest logs.</li>
+</ul>
+<h3>Logging in and coming back</h3>
+<ul>
+<li><b>Daily free pack</b> for a very easy objective (play one match).</li>
+<li><b>Monthly login track with no streak reset:</b> rewards grow with the number of days logged in, so missing a day never wipes out progress.</li>
+<li><b>Comeback rewards:</b> after 7 days away, a welcome-back mission plus 1 pack. After 30 days, a short mission chain plus 3 packs.</li>
+<li><b>Account milestones</b> with slowly growing rewards, including <b>loyalty cosmetics</b> that can't be bought.</li>
+</ul>
+</section>
+
+<section><h2>Monetization</h2>
+<p>Real money buys <b>time and looks, never exclusive power</b>. Prices are in USD; the single pack price is 100 gems.</p>
+<h3>Gems</h3>
+<table><tr><th>Tier</th><th>Price</th><th>Gems</th><th>Bonus vs. base rate</th><th>$ per 100 gems</th><th>First purchase (double)</th></tr>
+<tr><td>1</td><td>$1.50</td><td>100</td><td>–</td><td>$1.50</td><td>200 gems · $0.75 per 100</td></tr>
+<tr><td>2</td><td>$4.99</td><td>385</td><td>+52 (14%)</td><td>$1.30</td><td>770 gems · $0.65 per 100</td></tr>
+<tr><td>3</td><td>$9.99</td><td>835</td><td>+169 (20%)</td><td>$1.20</td><td>1,670 gems · $0.60 per 100</td></tr>
+<tr><td>4</td><td>$49.99</td><td>5,040</td><td>+1,707 (34%)</td><td>$0.99</td><td>10,200 gems · $0.49 per 100</td></tr></table>
+<p class="note">"First-Time Double": a player's first purchase gives double gems, a strong one-time reason to make that first purchase.</p>
+<h3>Daily Packs</h3>
+<table><tr><th>Deal</th><th>Price</th><th>Packs</th><th>$ per pack</th><th>Discount</th></tr>
+<tr><td>Tier 1</td><td>$9.99</td><td>10</td><td>$1.00</td><td>33%</td></tr>
+<tr><td>Tier 2</td><td>$14.99</td><td>20</td><td>$0.75</td><td>50%</td></tr>
+<tr><td>Tier 3</td><td>$19.99</td><td>30</td><td>$0.67</td><td>56%</td></tr></table>
+<p>Daily Packs are the best value per pack, but they're <b>deferred</b>: one pack can be claimed per day. Unclaimed days never expire, so missing a day costs nothing. A player can own at most two deals; the second one starts automatically when the first runs out.</p>
+<h3>Battle pass</h3>
+<table><tr><th>Tier</th><th>Price</th><th>Contents</th></tr>
+<tr><td>Premium</td><td>$9.99</td><td>About $30 of value: gems, packs, card fragments, cosmetic vouchers (choose your own cosmetic) and season-specific cosmetics</td></tr>
+<tr><td>Epic</td><td>$19.99</td><td>Premium + instant 15-level jump + exclusive cosmetic</td></tr>
+<tr><td>Legendary</td><td>$29.99</td><td>Premium + instant 30-level jump + exclusive cosmetic</td></tr></table>
+<ul>
+<li><b>50 levels, 550 XP each.</b> Every level costs the same. After level 50, rewards repeat, so engaged players keep earning.</li>
+<li><b>XP per match:</b> PvP win 500, PvP loss 250 (surrendering earns nothing), plus 10 XP per active minute. PvE matches earn less XP depending on difficulty. An average 15-minute match is worth about 525 XP.</li>
+<li>Only bought with money, not earned gems. Upgrading to a higher tier costs only the difference.</li>
+<li><b>Season leaderboard</b> by battle pass level, with achievements for level milestones (e.g. level 100 and 150) and a cosmetic for the top 1% of the season.</li>
+</ul>
+<table><tr><th>Profile</th><th>Matches / season</th><th>Level reached</th><th>With Epic (+15)</th><th>With Legendary (+30)</th></tr>
+<tr><td>Casual</td><td>20</td><td>19</td><td>34</td><td>49</td></tr><tr><td>Regular</td><td>54</td><td>51</td><td>66</td><td>81</td></tr><tr><td>Engaged</td><td>156</td><td>148</td><td>163</td><td>178</td></tr><tr><td>Hardcore</td><td>360</td><td>343</td><td>358</td><td>373</td></tr></table>
+<p><b>Why 550 XP per level:</b> the pass should be finishable by a <b>Regular</b> player, who reaches level 50 near the end of the season. If paying players can't finish what they bought, they're unlikely to buy the next pass. A Casual player reaches about level 20; the Legendary tier takes them almost to the end.</p>
+<h3>Other offers</h3>
+<table><tr><th>Offer</th><th>Price</th><th>Design intent</th></tr>
+<tr><td>Booster packs</td><td>100 gems or 150 gold each</td><td>Mixed packs, plus colour and suit packs that only drop cards of one colour or suit</td></tr>
+<tr><td>Starter decks</td><td>Priced below the same number of cards in packs</td><td>52 fixed cards in Default art: fast deck building, no rare art</td></tr>
+<tr><td>Bundles and event sales</td><td>Limited time</td><td>Packs + cosmetics + fragments, timed with events and holidays (Christmas, anniversary)</td></tr>
+<tr><td>Cosmetics</td><td>Gold or gems</td><td>Card backs, match backgrounds with music, portraits, frames, titles; individually or as a cheaper collection</td></tr></table>
+<h3>Guardrails</h3>
+<ul>
+<li>All drop rates are shown in the shop, and rare pulls are highlighted during pack opening.</li>
+<li>Every card and effect can be earned for free. Random and Draft ignore the collection entirely.</li>
+<li>Crafted cards stay Default art, so crafting never replaces packs.</li>
+<li>Nerfed cards can be dismantled for their full craft cost.</li>
+<li>A pity timer guarantees a Full Art or better within a set number of packs (planned, not yet in the model).</li>
+</ul>
+</section>
+
+<section><h2>Feature spec: Quests &amp; rerolls</h2>
+<p>A handoff-ready spec for one system, written for engineering, UI and QA.</p>
+<div class="spec">
+<h3>Goals</h3><ul><li>Give every session a short, clear set of goals.</li><li>Let players choose quests that match how they like to play.</li><li>Steer players toward modes, mechanics and the weekly modifier.</li></ul>
+<h3>Non-goals</h3><ul><li>Quests aren't the main source of power.</li><li>No quest should require spending real money.</li></ul>
+<h3>Rules</h3>
+<table><tr><th></th><th>Daily</th><th>Weekly</th><th>Monthly</th></tr>
+<tr><td>Offered / required</td><td>5 / 3</td><td>6 / 4</td><td>8 / 5</td></tr>
+<tr><td>Reward per quest</td><td>10 gold</td><td>15 gold</td><td>25 gold</td></tr>
+<tr><td>Completion reward</td><td>(daily free pack is separate)</td><td>1 pack</td><td>2 packs + art token</td></tr>
+<tr><td>Bonus: all offered quests</td><td>+10 gold</td><td>Cosmetic progress</td><td>Cosmetic progress</td></tr>
+<tr><td>Free rerolls</td><td>1</td><td>1</td><td>1</td></tr>
+<tr><td>Paid reroll (first)</td><td>10 gold</td><td>25 gold</td><td>50 gold</td></tr></table>
+<ul>
+<li>Each paid reroll in the same period doubles the price. A paid reroll costs one to two quests' worth of gold, so it's a convenience, not a way to farm.</li>
+<li>A reroll never brings back a quest that was already offered, unless every quest in the pool has been seen.</li>
+<li>Completed or claimed quests can't be rerolled. Rerolling a quest that's partly done resets its progress, and the dialog says so.</li>
+<li>Reset times: daily at 04:00 local time, weekly on Monday, monthly on the 1st. Unclaimed rewards are claimed automatically at reset.</li>
+<li>If a quest becomes impossible (e.g., its event mode ended), it's replaced for free.</li>
+</ul>
+<h3>Analytics events</h3>
+<p><code>quest_offered</code> <code>quest_progress</code> <code>quest_completed</code> <code>quest_claimed</code> <code>quest_rerolled</code> (with cost, free/paid, reroll index) <code>quest_expired</code></p>
+<h3>Remote config</h3>
+<p><code>quests.daily.offered</code> <code>quests.daily.required</code> <code>quests.reward.*</code> <code>quests.reroll.base_cost.*</code> <code>quests.reroll.multiplier</code> <code>quests.pool</code> (weighted quest pool per category)</p>
+<h3>QA acceptance criteria</h3>
+<ul>
+<li>The first reroll in each category is free; the next costs the base price and then doubles.</li>
+<li>A reroll never shows a previously offered quest while unseen quests remain in the pool.</li>
+<li>Progress, rewards and reroll counts survive app restarts and are validated on the server.</li>
+<li>Completing more quests than required grants the bonus exactly once.</li>
+</ul></div>
+</section>
+
+<section><h2>KPIs &amp; guardrails</h2>
+<table><tr><th>System</th><th>Primary KPI</th><th>Guardrail</th></tr>
+<tr><td>Onboarding</td><td>D1 / D7 retention, tutorial quest completion</td><td>New-player win rate in the first week stays near 50%</td></tr>
+<tr><td>Quests &amp; rerolls</td><td>Daily quest completion rate, sessions per day</td><td>Reroll rate (very high means the quest pool needs work)</td></tr>
+<tr><td>Economy</td><td>Free packs per active day (target 1–2)</td><td>Share of players hitting the gold cap (bot signal)</td></tr>
+<tr><td>Weekly modifiers</td><td>Matches played under the modifier</td><td>Average match length stays around 15 minutes</td></tr>
+<tr><td>Monetization</td><td>Payer conversion, ARPDAU</td><td>Win-rate gap between free and paying players in Normal mode</td></tr>
+<tr><td>Collection</td><td>Milestone completion, art-token use</td><td>Duplicate rate per pack (too high feels bad)</td></tr></table>
+</section>
+
+<section><h2>Links</h2><div class="links"><a class="btn" href="https://docs.google.com/spreadsheets/d/1jcOW8E9k-_3IaDA458qoxKh_49oPYQluWO2pk144yH0/edit?usp=sharing" target="_blank" rel="noopener">Economy model (Google Sheets)</a><a class="btn" href="index.html">Rogue Deck design &amp; balancing</a></div></section>
+</main><footer>© 2026 Mark Herdt</footer></body></html>
