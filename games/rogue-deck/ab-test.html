@@ -1,0 +1,243 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Crect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%235eead4%22/%3E%3Ctext x=%2250%22 y=%2268%22 font-size=%2252%22 font-family=%22Arial%22 font-weight=%22bold%22 text-anchor=%22middle%22 fill=%22%230e1116%22%3EMH%3C/text%3E%3C/svg%3E">
+<meta name="referrer" content="strict-origin-when-cross-origin"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rogue Deck – A/B Test Plan | Mark Herdt</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0e1116;--surface:#161b22;--surface2:#1f2630;--text:#e6edf3;--muted:#9aa5b1;--accent:#5eead4;--accent2:#a78bfa;--border:#2a323d}
+body{background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif;line-height:1.7}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px}
+nav{border-bottom:1px solid var(--border)}nav .wrap{height:60px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:"JetBrains Mono",monospace;color:var(--text)}.logo span{color:var(--accent)}
+header{padding:60px 0 30px}.tag{font-family:"JetBrains Mono",monospace;color:var(--accent);font-size:.9rem}
+h1{font-size:clamp(2.2rem,5vw,3.2rem);line-height:1.1;margin:10px 0 14px}
+.lead{color:var(--muted);font-size:1.1rem}
+.video{aspect-ratio:16/9;border-radius:14px;overflow:hidden;border:1px solid var(--border);margin:30px 0}
+.video iframe{width:100%;height:100%;border:0}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:20px}
+.fact{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px}
+.fact b{display:block;font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;color:var(--accent2)}
+section{padding:34px 0;border-top:1px solid var(--border)}
+h2{font-size:1.5rem;margin-bottom:12px}h3{font-size:1.1rem;margin:18px 0 6px}li{margin-bottom:6px}p+p{margin-top:10px}p,li{color:#c9d3dc}ul{margin-left:20px}
+.todo{border:1px dashed var(--accent2);border-radius:10px;padding:14px;color:var(--muted);font-style:italic;margin-top:10px}
+.links{display:flex;flex-wrap:wrap;gap:12px;margin-top:10px}
+.btn{display:inline-block;padding:10px 18px;border-radius:10px;border:1px solid var(--border);background:var(--surface);color:var(--text);font-weight:600}
+.btn:hover{border-color:var(--accent);text-decoration:none}
+table{width:100%;border-collapse:collapse;margin:12px 0 6px;font-size:.93rem}th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--border)}th{color:var(--muted);font-weight:600;font-size:.8rem;text-transform:uppercase;letter-spacing:.05em}td{color:#c9d3dc}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:8px}
+.chart{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;margin:12px 0}
+.bar{display:grid;grid-template-columns:90px 1fr 56px;align-items:center;gap:10px;margin:8px 0}.bl{font-size:.9rem}.bv{text-align:right;font-variant-numeric:tabular-nums;color:var(--muted)}
+.bt{background:var(--surface2);border-radius:6px;height:14px;overflow:hidden}.bf{height:100%;border-radius:6px}
+@media(max-width:600px){table{display:block;overflow-x:auto;white-space:nowrap}}
+.note{font-size:.85rem;color:var(--muted);font-style:italic}
+.cat{margin:18px 0}.cat h4{font-size:1rem;margin-bottom:8px}.cat h4 span{color:var(--muted);font-weight:400}
+.fx{display:grid;grid-template-columns:230px 1fr auto;gap:12px;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);font-size:.92rem}
+.fxn{font-weight:600}.fxd{color:var(--muted)}.rc{display:inline-block;border:1px solid;border-radius:99px;padding:1px 8px;font-size:.75rem;margin:2px}
+@media(max-width:700px){.fx{grid-template-columns:1fr}}
+.scale{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px 16px;margin-top:12px;overflow-x:auto}
+.srow{display:grid;grid-template-columns:220px repeat(4,1fr);gap:10px;align-items:center;padding:7px 0;min-width:560px}
+.shead span{font-size:.75rem;text-transform:uppercase;letter-spacing:.06em}
+.sn{font-size:.9rem}.sn em{display:block;font-style:normal;color:var(--muted);font-size:.75rem}
+.srow span{position:relative}.srow i{display:block;height:18px;border-radius:4px;opacity:.85}.srow b{position:absolute;left:6px;top:0;font-size:.75rem;color:#0e1116;line-height:18px}.na{color:var(--muted)}
+.mxw{overflow-x:auto;margin:14px 0}.mx{min-width:640px;font-size:.82rem}.mx th{font-size:.72rem;text-transform:none;letter-spacing:0;vertical-align:bottom}
+.mx td{text-align:center;font-weight:600;border:2px solid var(--bg)}
+td.high,.legend .high{background:#7f1d1d;color:#fecaca}td.medium,.legend .medium{background:#78350f;color:#fde68a}td.low,.legend .low{background:#14532d;color:#bbf7d0}td.d{color:var(--muted)}
+.legend span{padding:2px 8px;border-radius:6px;font-size:.8rem;font-weight:600}.legend{font-size:.85rem;color:var(--muted)}
+.costchart{display:grid;grid-template-columns:repeat(10,1fr);gap:8px;align-items:end;height:200px;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:30px 14px 10px;margin-top:12px}
+.cb{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;position:relative}.cb i{display:block;width:100%;background:var(--accent2);border-radius:4px 4px 0 0}
+.cb b{font-size:.7rem;color:var(--muted);order:-1;margin-bottom:4px}.cb span{font-size:.75rem;color:var(--muted);margin-top:4px}
+.chart .bar{grid-template-columns:150px 1fr 100px}
+.flow{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:24px 16px;margin:18px 0;display:flex;flex-direction:column;align-items:center;gap:0}
+.flow .ft{font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:14px}
+.node{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:10px 16px;text-align:center;font-size:.92rem;max-width:340px;color:var(--text)}
+.node small{display:block;color:var(--muted);font-size:.78rem;margin-top:2px}
+.node.start{border-color:var(--accent);color:var(--accent);font-weight:600}
+.node.dec{border:1px dashed var(--accent2);color:var(--accent2);font-weight:600}
+.node.good{border-color:#4ade80;color:#bbf7d0}.node.bad{border-color:#f87171;color:#fecaca}.node.end{border-color:#fbbf24;color:#fde68a;font-weight:600}
+.arrow{width:2px;height:22px;background:var(--border);position:relative;margin:2px 0 6px}.arrow::after{content:"";position:absolute;bottom:-5px;left:-4px;border:5px solid transparent;border-top-color:var(--border)}
+.branch{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;width:100%}
+.branch>div{display:flex;flex-direction:column;align-items:center;flex:1;min-width:140px;max-width:280px}
+.lbl{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:4px}
+.loop{margin-top:6px;font-size:.85rem;color:var(--accent);border:1px solid var(--accent);border-radius:99px;padding:4px 14px}
+footer{padding:30px 0;text-align:center;color:var(--muted);font-size:.85rem;border-top:1px solid var(--border)}.iter{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px 18px;margin:14px 0}
+.iter h3{margin:0 0 10px}.iter dl{display:grid;grid-template-columns:110px 1fr;gap:6px 14px;margin:0}
+.iter dt{font-family:"JetBrains Mono",monospace;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;color:var(--accent2);padding-top:3px}
+.iter dd{margin:0;color:#c9d3dc}.iter.rej{border-style:dashed}.iter.next{border-color:var(--accent)}.iter.next dt{color:var(--accent)}
+@media(max-width:600px){.iter dl{grid-template-columns:1fr}.iter dt{padding-top:8px}}
+</style><style>
+.pill{display:inline-block;font-family:"JetBrains Mono",monospace;font-size:.72rem;padding:2px 9px;border-radius:99px;border:1px solid var(--accent2);color:var(--accent2);margin-right:6px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:14px 0}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 16px}
+.card h4{font-size:.95rem;margin-bottom:4px}.card p{font-size:.9rem;color:var(--muted)}
+.ladder{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:6px 16px;margin:14px 0}
+.rung{display:grid;grid-template-columns:110px 1fr 1.1fr;gap:14px;padding:10px 0;border-bottom:1px solid var(--border);font-size:.92rem;align-items:baseline}
+.rung:last-child{border:0}.rung b{font-family:"JetBrains Mono",monospace;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;color:var(--accent)}
+.rung span{color:var(--muted)}
+.rng{color:var(--muted);font-size:.85em}
+@media(max-width:640px){.rung{grid-template-columns:1fr}}
+.flowx{display:grid;grid-template-columns:1fr 70px 1fr 70px 1fr;align-items:center;gap:0;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;margin:14px 0}
+.col h5{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:6px;text-align:center}
+.box{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:7px 10px;margin:6px 0;font-size:.85rem;text-align:center}
+.box.g{border-color:var(--accent);color:var(--accent)}.box.p{border-color:var(--accent2);color:var(--accent2)}.box.y{border-color:#fbbf24;color:#fde68a}
+.arr{text-align:center;color:var(--muted);font-size:1.4rem}
+@media(max-width:700px){.flowx{grid-template-columns:1fr}.arr{transform:rotate(90deg)}}
+.cal{overflow-x:auto;margin:14px 0}
+.calg{display:grid;grid-template-columns:150px repeat(28,minmax(14px,1fr));gap:3px 2px;min-width:640px;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px;font-size:.8rem;align-items:center}
+.calg .wk{font-family:"JetBrains Mono",monospace;font-size:.7rem;color:var(--muted);text-align:center}
+.calg .lab{color:var(--text);padding-right:8px}
+.calg i{display:block;height:16px;border-radius:4px}
+.stack{display:grid;grid-template-columns:120px 1fr 52px;gap:10px;align-items:center;margin:8px 0;font-size:.88rem}
+.stack .st{display:flex;height:18px;border-radius:5px;overflow:hidden;background:var(--surface2)}
+.stack .st span{display:block;height:100%}
+.stack .v{text-align:right;font-variant-numeric:tabular-nums;color:var(--muted)}
+.key{display:flex;flex-wrap:wrap;gap:14px;font-size:.8rem;color:var(--muted);margin-top:8px}.key i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:middle}
+.spec{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px 20px;margin:14px 0}
+.spec h3:first-child{margin-top:0}.spec code{font-family:"JetBrains Mono",monospace;font-size:.82rem;background:var(--surface2);padding:1px 6px;border-radius:4px;color:var(--accent)}
+.disclaimer{border:1px dashed var(--accent2);border-radius:10px;padding:12px 14px;color:var(--muted);font-size:.9rem;margin:6px 0 20px}
+svg text{font-family:Inter,system-ui,sans-serif}
+
+.shop{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+.shop .side{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px}
+.shop h5{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:4px}
+.offer{border:1px solid;border-radius:10px;padding:9px 12px;margin:8px 0;background:var(--surface2)}
+.offer .r{font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;font-weight:700}
+.offer .n{font-weight:600;font-size:.92rem}.offer .c{font-size:.82rem;color:var(--muted)}
+.offer .pb{font-family:"JetBrains Mono",monospace;font-size:.78rem;color:var(--accent);margin-top:3px}
+@media(max-width:640px){.shop{grid-template-columns:1fr}}
+td.ok{color:#4ade80;font-weight:600}
+.chart .bar{grid-template-columns:190px 1fr 56px}
+@media(max-width:600px){.chart .bar{grid-template-columns:110px 1fr 50px}.chart .bl{font-size:.8rem}}
+</style></head><body>
+<nav><div class="wrap"><a class="logo" href="../../index.html">mark<span>.herdt</span>()</a><a href="index.html">← Rogue Deck design</a></div></nav>
+<main class="wrap">
+<header><p class="tag">// A/B testing · Experiment design · Design case study</p><h1>Rogue Deck: A/B Test Plan</h1>
+<p class="lead">My playtest logs showed that players almost never buy Common Rogue effects. This page plans the A/B test I would run once <a href="index.html">Rogue Deck</a> is live: hypothesis, metrics, sample size, analysis and the rules for deciding whether to ship.</p></header>
+<div class="disclaimer">The baseline comes from my real playtest logs. Rogue Deck isn't live yet, so the experiment result further down is <b>simulated</b>, using assumed traffic and effect sizes. The <a href="https://github.com/MomSesImSpcl/MarkHerdt.dev/tree/main/tools/ab-test" target="_blank" rel="noopener">analysis code</a> produces every number on this page and can be run on real logs later without changes.</div>
+<div class="facts"><div class="fact"><b>Baseline</b>2.3% of Rogue purchases are Common (6 of 266)</div><div class="fact"><b>Variant</b>Shop shows each offer's expected gain and payback</div><div class="fact"><b>Split</b>50/50, randomized by player</div><div class="fact"><b>Duration</b>14 days, two full weeks</div><div class="fact"><b>Simulated result</b>2.3% → 4.0%, all guardrails pass</div></div>
+
+<section><h2>1. The problem</h2>
+<p>The Rogue shop offers three effects at a time. With rarity weights of 8/4/2/1, more than half of all offers are Common. In 20 logged playtest matches, players made 266 Rogue purchases, and only 6 of them were Common.</p>
+<div class="chart">
+<div class="bar"><span class="bl">Common share of offers</span><div class="bt"><div class="bf" style="width:53.3%;background:#9aa5b1"></div></div><span class="bv">53.3%</span></div>
+<div class="bar"><span class="bl">Common share of purchases</span><div class="bt"><div class="bf" style="width:2.3%;background:#5eead4"></div></div><span class="bv">2.3%</span></div>
+</div>
+<p>The balancing model says Commons are not bad deals. Here's an example offer, with values from the model at a mid-match score of about 100 points:</p>
+<table><tr><th>Offer</th><th>Rarity</th><th>Cost</th><th>Expected gain</th><th>Net</th><th>Payback</th></tr>
+<tr><td>Score Multiplier: Hearts ×2</td><td><span class="dot" style="background:#9aa5b1"></span>Common</td><td>10</td><td>+27</td><td>+17</td><td>2.7×</td></tr>
+<tr><td>Score Multiplier: Red ×2</td><td><span class="dot" style="background:#4ade80"></span>Rare</td><td>20</td><td>+54</td><td>+34</td><td>2.7×</td></tr>
+<tr><td>Score Multiplier: Hearts ×5</td><td><span class="dot" style="background:#a78bfa"></span>Legendary</td><td>40</td><td>+68</td><td>+28</td><td>1.7×</td></tr></table>
+<p class="note">Expected points gained over the rest of the match, from the <a href="https://docs.google.com/spreadsheets/d/1dw4X00niFlxCuj96TsYGd5FnsYzix9_52m8x8lmlegU/edit?usp=sharing" target="_blank" rel="noopener">balancing spreadsheet</a>.</p>
+<p>The Common earns back its cost as well as the Rare and better than the Legendary. But it adds fewer points per Rogue slot, and slots are limited. On the other hand, its low price keeps your score higher, so the next slot unlocks sooner. Which choice wins over a whole match isn't obvious from the model alone. That's why this is tested with players, and why final score is a guardrail.</p>
+</section>
+
+<section><h2>2. Hypothesis &amp; variant</h2>
+<div class="spec"><h3>Hypothesis</h3><p>Players judge Rogue offers by rarity, not by value. If the shop shows what each offer is expected to earn, more players will pick Commons when they are the better deal, without hurting match scores, match length or retention.</p></div>
+<div class="shop">
+<div class="side"><h5>A · Control (today)</h5>
+<div class="offer" style="border-color:#9aa5b1"><span class="r" style="color:#9aa5b1">Common</span><div class="n">Score Multiplier: Hearts ×2</div><div class="c">Cost: 10% of your score</div></div>
+<div class="offer" style="border-color:#4ade80"><span class="r" style="color:#4ade80">Rare</span><div class="n">Score Multiplier: Red ×2</div><div class="c">Cost: 20% of your score</div></div>
+<div class="offer" style="border-color:#a78bfa"><span class="r" style="color:#a78bfa">Legendary</span><div class="n">Score Multiplier: Hearts ×5</div><div class="c">Cost: 40% of your score</div></div>
+</div>
+<div class="side"><h5>B · Variant (shows expected value)</h5>
+<div class="offer" style="border-color:#9aa5b1"><span class="r" style="color:#9aa5b1">Common</span><div class="n">Score Multiplier: Hearts ×2</div><div class="c">Cost: 10% of your score</div><div class="pb">≈ +27 pts for 10 · pays back 2.7×</div></div>
+<div class="offer" style="border-color:#4ade80"><span class="r" style="color:#4ade80">Rare</span><div class="n">Score Multiplier: Red ×2</div><div class="c">Cost: 20% of your score</div><div class="pb">≈ +54 pts for 20 · pays back 2.7×</div></div>
+<div class="offer" style="border-color:#a78bfa"><span class="r" style="color:#a78bfa">Legendary</span><div class="n">Score Multiplier: Hearts ×5</div><div class="c">Cost: 40% of your score</div><div class="pb">≈ +68 pts for 40 · pays back 1.7×</div></div>
+</div></div>
+<p class="note">Shop mock-up, not the in-game UI. Values are the model numbers from the table above; in the game they would be calculated from the player's current score and remaining turns.</p>
+<ul>
+<li><b>One change only.</b> The variant changes the shop UI, not prices or rarity weights, so any effect comes from information alone. A Common price change is a separate follow-up test.</li>
+<li><b>Both numbers are shown.</b> Showing only the payback ratio would push players towards Commons even when a Rare adds more points. Showing gain and cost lets players judge for themselves.</li>
+</ul>
+</section>
+
+<section><h2>3. Test setup</h2>
+<table><tr><th>Decision</th><th>Choice</th><th>Why</th></tr>
+<tr><td>Randomization unit</td><td>Player account, 50/50</td><td>A player always sees the same shop, on every device. Randomizing per match would show the same player both versions.</td></tr>
+<tr><td>Assignment</td><td>Hash of player ID + experiment name</td><td>Stable, reproducible, and independent from other tests running at the same time.</td></tr>
+<tr><td>Who is in the test</td><td>Every player who opens the Rogue shop</td><td>Players who never see the shop can't be affected and only add noise.</td></tr>
+<tr><td>Modes</td><td>Normal, Random and Draft</td><td>Ranked stays on the current shop until the decision, so no ranked result depends on a player's test group.</td></tr>
+<tr><td>Mixed matches</td><td>Allowed</td><td>Players from both groups meet in the same matches. Common Rogue effects are suit multipliers that only change the buyer's own score, so the variant doesn't change what opponents face.</td></tr>
+<tr><td>Before the test</td><td>One-week A/A test</td><td>Both groups get the current shop. Checks that assignment and logging work, and measures the real correlation between one player's purchases.</td></tr></table>
+</section>
+
+<section><h2>4. Metrics</h2>
+<table><tr><th>Type</th><th>Metric</th><th>Decision rule</th></tr>
+<tr><td><b>Primary</b></td><td>Common share of Rogue purchases</td><td>95% confidence interval of the difference is above 0</td></tr>
+<tr><td>Guardrail</td><td>Average match length</td><td>Increase smaller than 5% (reading the shop must not slow matches down)</td></tr>
+<tr><td>Guardrail</td><td>Average final score</td><td>Decrease smaller than 5% (players must not be steered into worse buys)</td></tr>
+<tr><td>Guardrail</td><td>Share of points spent on Rogue effects</td><td>Within ±3 percentage points of today's ~30%</td></tr>
+<tr><td>Guardrail</td><td>D7 retention of new players</td><td>Drop smaller than 3 percentage points (see sample size)</td></tr>
+<tr><td>Secondary</td><td>Purchases per match, time spent in the shop, win rate of variant players in mixed matches</td><td>Tracked to explain the result, not used for the decision</td></tr></table>
+<p>Guardrails use one-sided non-inferiority checks: the 90% confidence interval has to stay inside the margin. A guardrail passes when the data rules out a meaningful harm, not just when the change isn't significant.</p>
+</section>
+
+<section><h2>5. Sample size &amp; duration</h2>
+<div class="ladder">
+<div class="rung"><b>Effect size</b><div>Smallest change worth acting on: +1.5 pp (2.3% → 3.8%)</div><span>A UI label is cheap, but smaller changes wouldn't fix the problem</span></div>
+<div class="rung"><b>Independent</b><div>2,033 purchases per group</div><span>Two-proportion test, α = 0.05, power 80%</span></div>
+<div class="rung"><b>Clustering</b><div>Design effect 2.28 → 4,636 purchases per group</div><span>One player makes ~27 purchases in 14 days (6 matches × 4.4), and their choices are correlated (assumed ICC 0.05)</span></div>
+<div class="rung"><b>Players</b><div>175 players per group</div><span>The primary metric is reached in about a day</span></div>
+<div class="rung"><b>Guardrail</b><div>D7: 2,100 new players per group</div><span>Can rule out a drop of 2.7 pp. Ruling out 1 pp would need 15,766 per group.</span></div>
+<div class="rung"><b>Duration</b><div>14 days</div><span>Two full weekday/weekend cycles, and enough time to see a novelty effect fade</span></div>
+</div>
+<p><b>The guardrails set the test size, not the primary metric.</b> Common share needs only a few hundred players, but D7 retention needs thousands. That's why the whole player base is in the test instead of a small slice, and why smaller retention effects are checked in a holdback group after rollout.</p>
+<table><tr><th>Assumption (not measured)</th><th>Value</th></tr>
+<tr><td>Unique players opening the Rogue shop in 14 days</td><td>24,000</td></tr>
+<tr><td>New players per day</td><td>600</td></tr>
+<tr><td>Matches per player in 14 days</td><td>6</td></tr>
+<tr><td>Correlation between one player's purchases (ICC)</td><td>0.05, replaced by the A/A test's value</td></tr>
+<tr><td>D7 retention of new players</td><td>15%</td></tr></table>
+</section>
+
+<section><h2>6. Analysis plan</h2>
+<p>Written down before the test starts, so the result can't shape the analysis:</p>
+<ul>
+<li><b>No peeking.</b> The test runs the full 14 days, even if the primary metric looks clear after day one. It only stops early for a bug or a severe guardrail breach.</li>
+<li><b>Sample ratio check first.</b> A chi-square test on group sizes. If p &lt; 0.001, assignment is broken and nothing else gets analysed until it's fixed.</li>
+<li><b>Clustered confidence interval.</b> Common share is a ratio of purchases, but players are the unit of randomization. The confidence interval uses the delta method with players as clusters, cross-checked with a bootstrap that resamples whole players.</li>
+<li><b>Novelty check.</b> Week 1 vs week 2. Rollout planning uses the week 2 effect.</li>
+<li><b>Segments are exploratory.</b> New vs existing players, 2- vs 4-player matches and game mode are looked at to understand the result, never to rescue a failed test.</li>
+</ul>
+</section>
+
+<section><h2>7. Simulated result</h2>
+<div class="disclaimer">Simulated data: 24,000 players with assumed behaviour, run through the analysis code above (seed 42). It shows the pipeline and the decision process, not how real players would react.</div>
+<p><b>Assignment:</b> 11,904 vs 12,096 players. Sample ratio check p = 0.22, so the split is healthy.</p>
+<div class="chart"><svg viewBox="0 0 820 170" width="100%" role="img" aria-label="Common share of purchases with 95% confidence intervals"><line x1="170" y1="20" x2="170" y2="130" stroke="#2a323d"/><text x="170" y="150" fill="#9aa5b1" font-size="12" text-anchor="middle">0%</text><line x1="294" y1="20" x2="294" y2="130" stroke="#2a323d"/><text x="294" y="150" fill="#9aa5b1" font-size="12" text-anchor="middle">1%</text><line x1="418" y1="20" x2="418" y2="130" stroke="#2a323d"/><text x="418" y="150" fill="#9aa5b1" font-size="12" text-anchor="middle">2%</text><line x1="542" y1="20" x2="542" y2="130" stroke="#2a323d"/><text x="542" y="150" fill="#9aa5b1" font-size="12" text-anchor="middle">3%</text><line x1="666" y1="20" x2="666" y2="130" stroke="#2a323d"/><text x="666" y="150" fill="#9aa5b1" font-size="12" text-anchor="middle">4%</text><line x1="790" y1="20" x2="790" y2="130" stroke="#2a323d"/><text x="790" y="150" fill="#9aa5b1" font-size="12" text-anchor="middle">5%</text><text x="0" y="43" fill="#e6edf3" font-size="14" font-weight="600">Control (A)</text><text x="0" y="60" fill="#9aa5b1" font-size="12">current shop</text><rect x="170" y="33" width="285" height="22" rx="4" fill="#9aa5b1" opacity=".85"/><line x1="444.3" y1="27" x2="444.3" y2="61" stroke="#e6edf3" stroke-width="2"/><line x1="465.2" y1="27" x2="465.2" y2="61" stroke="#e6edf3" stroke-width="2"/><line x1="444.3" y1="44" x2="465.2" y2="44" stroke="#e6edf3" stroke-width="2"/><text x="475" y="49" fill="#e6edf3" font-size="13" font-weight="600">2.30%</text><text x="0" y="98" fill="#e6edf3" font-size="14" font-weight="600">Variant (B)</text><text x="0" y="115" fill="#9aa5b1" font-size="12">shows expected value</text><rect x="170" y="88" width="498" height="22" rx="4" fill="#5eead4" opacity=".85"/><line x1="655.0" y1="82" x2="655.0" y2="116" stroke="#e6edf3" stroke-width="2"/><line x1="681.1" y1="82" x2="681.1" y2="116" stroke="#e6edf3" stroke-width="2"/><line x1="655.0" y1="99" x2="681.1" y2="99" stroke="#e6edf3" stroke-width="2"/><text x="691" y="104" fill="#e6edf3" font-size="13" font-weight="600">4.02%</text></svg></div>
+<p class="note">Bars show the Common share per group, lines the 95% confidence interval.</p>
+<table><tr><th></th><th>Control (A)</th><th>Variant (B)</th><th>Difference (95% CI)</th></tr>
+<tr><td>Whole test</td><td>2.30%</td><td>4.02%</td><td><b>+1.72 pp</b> (+1.59 to +1.86)</td></tr>
+<tr><td>Week 1</td><td>2.35%</td><td>4.15%</td><td>+1.80 pp (+1.63 to +1.97)</td></tr>
+<tr><td>Week 2</td><td>2.24%</td><td>3.89%</td><td>+1.64 pp (+1.48 to +1.80)</td></tr></table>
+<p>The variant raises the Common share by 75% (relative). The player bootstrap gives almost the same interval (+1.60 to +1.85 pp). The observed design effect was 2.61, a bit higher than the planned 2.28 because some players play far more matches than others, but the test still had far more data than it needed. The effect is slightly smaller in week 2, a typical novelty pattern, so the week 2 value is the one to plan with.</p>
+<h3>Guardrails</h3>
+<table><tr><th>Metric</th><th>Control</th><th>Variant</th><th>Change (90% CI)</th><th>Rule</th><th>Result</th></tr>
+<tr><td>Match length</td><td>15.0 min</td><td>15.3 min</td><td>+1.7% (+1.5% to +2.0%)</td><td>Increase &lt; 5%</td><td class="ok">Pass</td></tr>
+<tr><td>Average final score</td><td>300</td><td>297</td><td>−1.0% (−1.4% to −0.6%)</td><td>Decrease &lt; 5%</td><td class="ok">Pass</td></tr>
+<tr><td>Points spent on Rogue effects</td><td>30.0%</td><td>29.2%</td><td>−0.8 pp (−0.9 to −0.8)</td><td>Within ±3 pp</td><td class="ok">Pass</td></tr>
+<tr><td>D7 retention (new players)</td><td>15.2%</td><td>15.6%</td><td>+0.4 pp (−1.4 to +2.3)</td><td>Drop &lt; 3 pp</td><td class="ok">Pass</td></tr></table>
+<p>Two guardrails moved significantly, but inside their margins: matches got slightly longer because players read the new line, and final scores dropped by 1%, which fits Commons adding fewer points per slot. Both are worth watching after rollout.</p>
+</section>
+
+<section><h2>8. Decision &amp; rollout</h2>
+<div class="flow">
+<div class="ft">Pre-registered decision</div>
+<div class="node start">Sample ratio OK · primary CI above 0 · all guardrails pass</div><div class="arrow"></div>
+<div class="node good">Ship the variant<small>simulated outcome</small></div><div class="arrow"></div>
+<div class="node">10% of players for 3 days<small>Check crashes, logging and guardrails at scale</small></div><div class="arrow"></div>
+<div class="node">50%, then 100%<small>Ranked gets the new shop too</small></div><div class="arrow"></div>
+<div class="node end">5% holdback for 4 weeks<small>Smaller retention changes (D7, D28) and long-term final score</small></div>
+</div>
+<h3>What would change the decision</h3>
+<ul>
+<li><b>Primary CI includes 0:</b> information alone doesn't change behaviour. Next, test a lower Common price instead.</li>
+<li><b>Final score falls by more than 5%:</b> the variant steers players into worse buys. Show net points only, or rebalance Commons before showing value.</li>
+<li><b>Match length rises by more than 5%:</b> the shop is too slow to read. Simplify to one number per offer and retest.</li>
+</ul>
+<h3>Follow-up test</h3>
+<p>If Commons are still rarely bought after rollout, the next test changes the price: for example Common Rogue effects at 5% instead of 10% of your score, with the same metrics and guardrails.</p>
+</section>
+
+<section><h2>Links</h2><div class="links"><a class="btn" href="https://github.com/MomSesImSpcl/MarkHerdt.dev/tree/main/tools/ab-test" target="_blank" rel="noopener">Analysis code (Python)</a><a class="btn" href="index.html">Rogue Deck design &amp; balancing</a><a class="btn" href="liveops.html">LiveOps &amp; economy</a></div></section>
+</main><footer>© 2026 Mark Herdt</footer></body></html>
