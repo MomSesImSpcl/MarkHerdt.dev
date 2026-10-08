@@ -88,6 +88,7 @@ p+p{margin-top:10px}
 <tr><td>Guardrail</td><td>D7 retention of new players</td><td>Drops by less than 3 percentage points</td></tr>
 <tr><td>Secondary</td><td>Purchases per match, time in the shop, win rate of B players when matched against A players</td><td>Only used to explain the result, not to decide</td></tr></table>
 <p><b>Primary</b> is what the test tries to improve. <b>Guardrails</b> are things that must not get worse. A guardrail only passes if the data shows any harm is smaller than the limit. "No visible difference" isn't enough, because a small test can miss a real problem.</p>
+<p><b>Known limit of the primary metric.</b> The Common share can also rise if players simply buy fewer higher rarities, without buying more Commons. In a live test I'd use Common purchases per Common offer shown as the primary metric instead, and keep the share as a secondary one.</p>
 </section>
 
 <section><h2>5. Sample size &amp; duration</h2>
