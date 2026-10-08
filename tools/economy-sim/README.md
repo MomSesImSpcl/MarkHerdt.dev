@@ -42,4 +42,4 @@ https://docs.google.com/spreadsheets/d/1jcOW8E9k-_3IaDA458qoxKh_49oPYQluWO2pk144
 
 - Uses the current effect catalog; new effects lower all percentages.
 - Packs per month are averages for typical players in each group.
-- The pity system and crafting are not modelled.
+- The pity system and crafting are not modeled.
