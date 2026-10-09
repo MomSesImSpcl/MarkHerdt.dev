@@ -30,7 +30,7 @@ section{scroll-margin-top:70px}
 <section id="ten-fruits"><h2>1. 10 fruits instead of 11</h2>
 <div class="iter"><dl>
 <dt>Intention</dt><dd>Make reaching the watermelon easier, so runs last longer and more players get to the most satisfying merge in the game.</dd>
-<dt>Alternatives</dt><dd>I started with the original 11 fruits. Reaching the watermelon was so hard that it stopped being fun.</dd>
+<dt>Alternatives</dt><dd>I started with the original 11 fruits. Reaching the watermelon was to hard that it became frustrating after some time.</dd>
 <dt>Testing</dt><dd>Tested by me during development. I locked in this decision before release.</dd>
 <dt>Iterations</dt><dd>11 fruits, like the original → 10 fruits.</dd>
 <dt>Result</dt><dd>The watermelon is still a goal players have to work for, but it's within reach: 69.4% of players reached one at least once (Steam achievement data).</dd>
@@ -39,10 +39,10 @@ section{scroll-margin-top:70px}
 <section id="grace-countdown"><h2>2. A 5-second grace countdown</h2>
 <div class="iter"><dl>
 <dt>Intention</dt><dd>Fairness. Fruits sometimes fall or bounce above the top line by bad luck, not because the player made a mistake. Losing instantly in that situation felt unfair.</dd>
-<dt>Alternatives</dt><dd>I first played without a countdown, where touching the line ends the game, just like the original. After adding the countdown, I tried several lengths.</dd>
+<dt>Alternatives</dt><dd>I first played without a countdown, where touching the line ends the game, just like the original. After adding the countdown, I tried several countdown durations.</dd>
 <dt>Testing</dt><dd>Tested by me during development. Shorter countdowns didn't give enough time to fix the stack. Longer ones removed the tension. I locked in 5 seconds before release.</dd>
 <dt>Iterations</dt><dd>Instant game over → countdown → tuned to 5 seconds.</dd>
-<dt>Result</dt><dd>An unlucky bounce now creates a short moment of tension instead of ending the run. The player gets a chance to fix the stack, but a stack that is really too high still ends the game.</dd>
+<dt>Result</dt><dd>An unlucky bounce now creates a short moment of tension instead of ending the run. The player gets a chance to fix the stack, but it's not a guarantee, if the stack is too high, it still ends the game.</dd>
 </dl></div></section>
 
 <section id="drop-cooldown"><h2>3. Fruit drop cooldown</h2>
@@ -57,7 +57,7 @@ section{scroll-margin-top:70px}
 <section id="skills"><h2>4. Three skills with a rising cost</h2>
 <p><b>Power Shot</b> fires the fruit with force, <b>+1 Up</b> evolves the fruit it touches, and <b>Destroy</b> removes the fruit it touches. All three are paid with points from your score.</p>
 <div class="iter"><dl>
-<dt>Intention</dt><dd>Comeback moments and more variety. The base game can get repetitive in long runs. Skills give players more ways to interact with the container.</dd>
+<dt>Intention</dt><dd>Comeback moments and more variety. The base game can get repetitive in long runs. Skills give players more ways to interact with the game.</dd>
 <dt>Alternatives</dt><dd>I started with a flat skill cost. In a long, good run where the player hadn't used any skills yet, they had saved up so many points that once they needed a skill, they could spam it. In theory, that let a player extend a run forever.</dd>
 <dt>Testing</dt><dd>Tested by me during development. I locked in this decision before release.</dd>
 <dt>Iterations</dt><dd>Flat cost → cost rises with each use. I tested different increases. 10% per use still allowed long runs, but was large enough that the cost never became irrelevant.</dd>
@@ -70,8 +70,8 @@ section{scroll-margin-top:70px}
 <dt>Intention</dt><dd>A "wow" moment when one drop sets off several merges in a row. A growing number feels good and rewards players for building a smart stack.</dd>
 <dt>Testing</dt><dd>Added after launch. It has no effect on gameplay, it's purely feedback.</dd>
 <dt>Iterations</dt><dd>I tuned how much time can pass between two merges for them to still count as one combo.</dd>
-<dt>After launch</dt><dd>Before release, I looked at other games in this style, and none had a combo counter. After I added mine, I noticed that new Suika-like games had one too. I can't prove that one led to the other.</dd>
-<dt>Result</dt><dd>Chain merges were already the most satisfying thing in the game. The counter makes them visible, so players notice and remember them.</dd>
+<dt>After launch</dt><dd>Before release, I researched other games in this style, and none had a combo counter. After I added mine, I noticed that new Suika-like games had one too. I can't prove that one led to the other though.</dd>
+<dt>Result</dt><dd>Chain merges were already the most satisfying thing in the game. The counter makes them visible, so players notice and remember them (There're also achievements for chain merges).</dd>
 </dl></div></section>
 
 <section id="preview-reward"><h2>6. Preview reward</h2>
