@@ -9,7 +9,7 @@ The site showcases my games, the design behind them, my Unity tools and my CV.
 
 | Game | What the design page covers |
 |---|---|
-| [Watermelon Game](https://markherdt.dev/games/watermelon-game.html) | Design changes vs. the original, skill economy, multiplayer, lessons from player reviews |
+| [Watermelon Game](https://markherdt.dev/games/watermelon-game/) | Design changes vs. the original, skill economy, multiplayer, lessons from player reviews |
 | [Rogue Deck](https://markherdt.dev/games/rogue-deck.html) | Card and Rogue effect catalogs, rarity math, combo matrix, economy and multiplier stacking |
 | [Queue Connect](https://markherdt.dev/games/queue-connect.html) | From Global Game Jam 2020 prototype to mobile release |
 
