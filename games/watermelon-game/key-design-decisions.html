@@ -1,0 +1,106 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Crect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%235eead4%22/%3E%3Ctext x=%2250%22 y=%2268%22 font-size=%2252%22 font-family=%22Arial%22 font-weight=%22bold%22 text-anchor=%22middle%22 fill=%22%230e1116%22%3EMH%3C/text%3E%3C/svg%3E">
+<meta name="referrer" content="strict-origin-when-cross-origin"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Watermelon Game – Key design decisions | Mark Herdt</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/style.css">
+<style>li{margin-bottom:6px}
+p+p{margin-top:10px}
+section{scroll-margin-top:70px}
+@media(max-width:600px){.iter dl{grid-template-columns:1fr}.iter dt{padding-top:8px}}
+</style></head><body>
+<nav><div class="wrap"><a class="logo" href="../../index.html">mark<span>.herdt</span>()</a><a href="../watermelon-game.html">← Watermelon Game</a></div></nav>
+<main class="wrap">
+<header><p class="tag">// Watermelon Game · Design case study</p><h1>Key design decisions</h1>
+<p class="lead">The eight changes I made to the Suika Game formula: what I wanted players to feel, what I tried first, and why the final version works the way it does.</p></header>
+<div class="disclaimer">I tested most of these decisions myself during development and locked them in before release. Four came after launch: the combo counter, the drop cooldown (from watching players' videos), the multiplayer mode and its stone fruit system. I don't have footage of earlier versions, so the trailer below shows the final game.</div>
+<div class="video"><iframe referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube-nocookie.com/embed/RMRHCmWvCqo" title="Watermelon Game trailer" allow="encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+<section><h2>Overview</h2>
+<ol>
+<li><a href="#ten-fruits">10 fruits instead of 11</a>: makes the watermelon reachable</li>
+<li><a href="#grace-countdown">A 5-second grace countdown</a>: fairness when a fruit bounces unluckily</li>
+<li><a href="#drop-cooldown">Fruit drop cooldown</a>: no more merging fruits in mid-air</li>
+<li><a href="#skills">Three skills with a rising cost</a>: comebacks and variety, without endless runs</li>
+<li><a href="#combo-counter">Combo counter</a>: a "wow" moment for chain merges</li>
+<li><a href="#preview-reward">Preview reward</a>: a strong but temporary advantage</li>
+<li><a href="#golden-fruit">Golden fruit</a>: the lucky save when all seems lost</li>
+<li><a href="#stone-fruit">Stone fruit (multiplayer)</a>: small attacks now, or a big one later</li>
+</ol></section>
+
+<section id="ten-fruits"><h2>1. 10 fruits instead of 11</h2>
+<div class="iter"><dl>
+<dt>Intention</dt><dd>Make reaching the watermelon easier, so runs last longer and more players get to the most satisfying merge in the game.</dd>
+<dt>Alternatives</dt><dd>I started with the original 11 fruits. Reaching the watermelon was so hard that it stopped being fun.</dd>
+<dt>Testing</dt><dd>Tested by me during development. I locked in this decision before release.</dd>
+<dt>Iterations</dt><dd>11 fruits, like the original → 10 fruits.</dd>
+<dt>Result</dt><dd>The watermelon is still a goal players have to work for, but it's within reach: 69.4% of players reached one at least once (Steam achievement data).</dd>
+</dl></div></section>
+
+<section id="grace-countdown"><h2>2. A 5-second grace countdown</h2>
+<div class="iter"><dl>
+<dt>Intention</dt><dd>Fairness. Fruits sometimes fall or bounce above the top line by bad luck, not because the player made a mistake. Losing instantly in that situation felt unfair.</dd>
+<dt>Alternatives</dt><dd>I first played without a countdown, where touching the line ends the game, just like the original. After adding the countdown, I tried several lengths.</dd>
+<dt>Testing</dt><dd>Tested by me during development. Shorter countdowns didn't give enough time to fix the stack. Longer ones removed the tension. I locked in 5 seconds before release.</dd>
+<dt>Iterations</dt><dd>Instant game over → countdown → tuned to 5 seconds.</dd>
+<dt>Result</dt><dd>An unlucky bounce now creates a short moment of tension instead of ending the run. The player gets a chance to fix the stack, but a stack that is really too high still ends the game.</dd>
+</dl></div></section>
+
+<section id="drop-cooldown"><h2>3. Fruit drop cooldown</h2>
+<div class="iter"><dl>
+<dt>Intention</dt><dd>More strategy. Players shouldn't be able to merge fruits in mid-air. Every drop should need planning, because a fruit can still roll after it touches something.</dd>
+<dt>Alternatives</dt><dd>At first, there was only a very short delay between drops (under a second), just so new fruits wouldn't spawn inside each other.</dd>
+<dt>Testing</dt><dd>After launch, I saw in players' videos that they dropped fruits so quickly that they merged in mid-air, skipping the physics puzzle.</dd>
+<dt>Iterations</dt><dd>Very short fixed delay → the next fruit can only be dropped once the previous one has touched the ground or another fruit.</dd>
+<dt>Result</dt><dd>Every drop has to land before the next one, so players have to see where it settles first. The physics puzzle, which is the core of the game, can't be skipped anymore.</dd>
+</dl></div></section>
+
+<section id="skills"><h2>4. Three skills with a rising cost</h2>
+<p><b>Power Shot</b> fires the fruit with force, <b>+1 Up</b> evolves the fruit it touches, and <b>Destroy</b> removes the fruit it touches. All three are paid with points from your score.</p>
+<div class="iter"><dl>
+<dt>Intention</dt><dd>Comeback moments and more variety. The base game can get repetitive in long runs. Skills give players more ways to interact with the container.</dd>
+<dt>Alternatives</dt><dd>I started with a flat skill cost. In a long, good run where the player hadn't used any skills yet, they had saved up so many points that once they needed a skill, they could spam it. In theory, that let a player extend a run forever.</dd>
+<dt>Testing</dt><dd>Tested by me during development. I locked in this decision before release.</dd>
+<dt>Iterations</dt><dd>Flat cost → cost rises with each use. I tested different increases. 10% per use still allowed long runs, but was large enough that the cost never became irrelevant.</dd>
+<dt>Result</dt><dd>Skills can extend a run a lot, but not forever. Each use makes the next one more expensive, and because skills are paid from your score, using them too often lowers it noticeably. Players have to think about <i>when</i> to use a skill, not just whether they can afford it.</dd>
+</dl></div>
+<p class="note">After launch, the achievement data showed that only about half of players ever used a skill. That's a discovery problem, not a balance problem: see <a href="../watermelon-game.html#player-journey">what the data says about the player journey</a>.</p></section>
+
+<section id="combo-counter"><h2>5. Combo counter</h2>
+<div class="iter"><dl>
+<dt>Intention</dt><dd>A "wow" moment when one drop sets off several merges in a row. A growing number feels good and rewards players for building a smart stack.</dd>
+<dt>Testing</dt><dd>Added after launch. It has no effect on gameplay, it's purely feedback.</dd>
+<dt>Iterations</dt><dd>I tuned how much time can pass between two merges for them to still count as one combo.</dd>
+<dt>After launch</dt><dd>Before release, I looked at other games in this style, and none had a combo counter. After I added mine, I noticed that new Suika-like games had one too. I can't prove that one led to the other.</dd>
+<dt>Result</dt><dd>Chain merges were already the most satisfying thing in the game. The counter makes them visible, so players notice and remember them.</dd>
+</dl></div></section>
+
+<section id="preview-reward"><h2>6. Preview reward</h2>
+<div class="iter"><dl>
+<dt>Intention</dt><dd>An extra reward for merging two watermelons that also adds strategy. For 5 minutes, players see the fruit after next, which is a big advantage. The timer pushes them to make faster decisions to get the most out of it.</dd>
+<dt>Alternatives</dt><dd>Stacking previews: every watermelon merge would add another preview with its own timer, so in theory a player could have unlimited previews if they kept merging watermelons within 5 minutes. I dropped it because there wasn't enough space on screen, and most players never merge two watermelons twice in that time anyway.</dd>
+<dt>Testing</dt><dd>Tested by me during development. I locked in this decision before release.</dd>
+<dt>Iterations</dt><dd>I tuned how long the preview stays visible.</dd>
+<dt>Result</dt><dd>A strong reward with a built-in limit: it helps for a while and adds urgency, but it can't snowball. Only 24.9% of players ever reached it, which I cover on the <a href="../watermelon-game.html#player-journey">main page</a>.</dd>
+</dl></div></section>
+
+<section id="golden-fruit"><h2>7. Golden fruit</h2>
+<div class="iter"><dl>
+<dt>Intention</dt><dd>Comeback moments. You know the next fruit will end your run, and then a golden fruit appears and clears a path. It feels like winning the lottery.</dd>
+<dt>Alternatives</dt><dd>There are two golden fruits. The strong one randomly replaces a normal fruit, and destroys every fruit it touches on the way down. The weaker one comes from shooting a fruit out of the top of the container with Power Shot. That idea started with an accident: the first time I shot a fruit out, it wasn't planned, and I decided it should come back as a golden fruit.</dd>
+<dt>Testing</dt><dd>During development, the golden fruit saved several of my own runs from a near-certain loss. After launch, players described the same moment in their reviews, and they liked it.</dd>
+<dt>Iterations</dt><dd>The Power Shot golden fruit was first as strong as the random one. In play, I noticed that shooting a fruit out isn't very hard in some situations, so I weakened it to destroy only the first fruit it hits.</dd>
+<dt>Result</dt><dd>The random golden fruit stays a rare, lucky moment. The weaker one is a reward for skill that players can work toward, without replacing the lucky one.</dd>
+</dl></div></section>
+
+<section id="stone-fruit"><h2>8. Stone fruit (multiplayer)</h2>
+<p>In PvP, merging fruits fills a meter that is separate from your score. You can use it to drop a <b>stone fruit</b> into your opponent's container. There is a stone version of each of the 10 fruits. Filling the meter once lets you send the smallest one, and every further fill moves it up one size. Sending a stone fruit resets the meter completely. Stone fruits can't be merged or destroyed, so they stay in the container as a permanent obstacle.</p>
+<div class="iter"><dl>
+<dt>Intention</dt><dd>A new layer of strategy and tension in multiplayer. A faster player who merges more can attack more often.</dd>
+<dt>Alternatives</dt><dd>I tried limiting which stone fruits players could send, for example only small ones.</dd>
+<dt>Testing</dt><dd>Multiplayer was added after launch. The current stone fruit system came in a later update, based on my own playtesting.</dd>
+<dt>Iterations</dt><dd>Limited stone fruit sizes → all 10 sizes. The size is chosen automatically by how often the meter has filled, from the smallest fruit up to the biggest.</dd>
+<dt>Result</dt><dd>Every attack is a choice: send a small stone fruit now, or keep merging and save up for a big one. Sending a small one in between costs all the progress toward the big one.</dd>
+</dl></div></section>
+
+<section><h2>Links</h2><div class="links"><a class="btn" href="../watermelon-game.html">Watermelon Game overview</a><a class="btn" href="https://store.steampowered.com/app/2658820/Watermelon_Game/" target="_blank" rel="noopener">Steam page</a></div></section>
+</main><footer>© 2026 Mark Herdt</footer></body></html>
