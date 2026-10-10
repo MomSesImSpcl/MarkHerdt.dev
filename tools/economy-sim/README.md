@@ -1,7 +1,7 @@
 # Rogue Deck – Economy simulation
 
 Monte Carlo simulation behind the **Collection progress** charts on the
-[LiveOps & economy case study](https://markherdt.dev/games/rogue-deck/liveops.html).
+[LiveOps & economy case study](https://markherdt.dev/games/rogue-deck/liveops-and-economy.html).
 
 It simulates players opening booster packs month by month and measures how much
 of the collection they own:

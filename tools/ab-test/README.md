@@ -1,7 +1,7 @@
 # Rogue Deck – A/B test: showing expected payback in the Rogue shop
 
 Plan and analysis code for the A/B test described on
-[markherdt.dev/games/rogue-deck/ab-test.html](https://markherdt.dev/games/rogue-deck/ab-test.html).
+[markherdt.dev/games/rogue-deck/ab-test-plan.html](https://markherdt.dev/games/rogue-deck/ab-test-plan.html).
 
 **Only the baseline is real data.** Rogue Deck is not live yet, so the experiment
 itself is **simulated**: traffic, retention, intra-player correlation and the

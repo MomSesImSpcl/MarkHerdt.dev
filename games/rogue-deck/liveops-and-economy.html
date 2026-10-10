@@ -16,10 +16,10 @@
 @media(max-width:700px){.flowx{grid-template-columns:1fr}.arr{transform:rotate(90deg)}}
 p+p{margin-top:10px}
 </style></head><body>
-<nav><div class="wrap"><a class="logo" href="../../index.html">mark<span>.herdt</span>()</a><a href="index.html">← Rogue Deck design</a></div></nav>
+<nav><div class="wrap"><a class="logo" href="../../index.html">mark<span>.herdt</span>()</a><a href="case-study.html">← Rogue Deck</a></div></nav>
 <main class="wrap">
-<header><p class="tag">// LiveOps · Economy · Progression</p><h1>Rogue Deck: LiveOps &amp; Economy</h1>
-<p class="lead">How I'm planning on running <a href="index.html">Rogue Deck</a> as a free-to-play live game: what players collect, how they earn it, what keeps them coming back each day, week and season, and how the economy holds together.</p></header>
+<header><p class="tag">// Rogue Deck · LiveOps &amp; economy</p><h1>Rogue Deck: LiveOps &amp; Economy</h1>
+<p class="lead">How I'm planning on running <a href="case-study.html">Rogue Deck</a> as a free-to-play live game: what players collect, how they earn it, what keeps them coming back each day, week and season, and how the economy holds together.</p></header>
 <div class="disclaimer">This is a design plan for features on my backlog, not a shipped system. Prices and reward values are assumptions, tuned in an <a href="https://docs.google.com/spreadsheets/d/1jcOW8E9k-_3IaDA458qoxKh_49oPYQluWO2pk144yH0/edit?usp=sharing" target="_blank" rel="noopener">editable economy model</a>. Rarity weights, effect counts and match length come from the current game.</div>
 <div class="facts"><div class="fact"><b>Model</b>Free-to-play, cosmetic and collection focused</div><div class="fact"><b>Free packs</b>~1–2 per active day</div><div class="fact"><b>Battle pass</b>50 levels, finishable from Regular players up</div><div class="fact"><b>Collection</b>61 effects, 312 artworks</div><div class="fact"><b>Match length</b>~15 minutes</div></div>
 
@@ -127,7 +127,7 @@ p+p{margin-top:10px}
 <li><b>Only a few effects</b> change per week, so updating a deck takes minutes, not an evening.</li>
 <li>Changes start <b>every Monday</b> and stay fixed for the whole week. The next week's changes are <b>announced over the weekend</b>, so players can prepare their decks in advance.</li>
 <li>They apply to <b>all modes, including ranked</b>.</li>
-<li>They give an <b>early signal</b> for planned balance changes. They're not how permanent changes are decided, though: too much changes at once (several boosts, the whole player base, the time in the season) to measure one effect cleanly, so permanent changes are confirmed with a <b><a href="ab-test.html">controlled A/B test</a></b> first.</li>
+<li>They give an <b>early signal</b> for planned balance changes. They're not how permanent changes are decided, though: too much changes at once (several boosts, the whole player base, the time in the season) to measure one effect cleanly, so permanent changes are confirmed with a <b><a href="ab-test-plan.html">controlled A/B test</a></b> first.</li>
 </ul></li>
 <li><b>The weekly booster pack</b> runs all month and is themed to that week's boosted effects: in a week where Score Multiplier is boosted, the pack has a higher chance of multiplier effects. The weekly challenges point the same way.</li>
 <li><b>Weekend Draft cups</b> reward tokens. The <b>special event</b> runs for <b>9 days across two weekends</b>, so players who mostly play on weekends don't miss it, and its <b>reward track</b> hands out cosmetic and art-upgrade tokens that feed the collection milestones.</li>
@@ -147,7 +147,7 @@ p+p{margin-top:10px}
 <li><b>More quests than required:</b> 5 daily quests (3 needed) and 7 weekly challenges (5 needed). Players pick what fits how they like to play. Finishing all of them gives a small bonus.</li>
 <li><b>One weekly system:</b> each weekly challenge pays gold and battle pass XP, and finishing the week adds a booster pack. Progress is rewarded per challenge, so it's never "all or nothing".</li>
 <li><b>Rerolls:</b> one free reroll per category, after that a small fee that rises with each reroll. A reroll never brings back a quest that was already offered.</li>
-<li>One daily quest can target a known design problem. "Win a match with 3 Common Rogue effects" directly tests the <a href="index.html#next-experiment">underbought-Commons finding</a> from the playtest logs.</li>
+<li>One daily quest can target a known design problem. "Win a match with 3 Common Rogue effects" directly tests the <a href="case-study.html#next-experiment">underbought-Commons finding</a> from the playtest logs.</li>
 </ul>
 <h3>Logging in and coming back</h3>
 <ul>
@@ -236,5 +236,5 @@ p+p{margin-top:10px}
 <tr><td>Collection</td><td>Milestone completion, art-token use</td><td>Duplicate rate per pack (too high feels bad)</td></tr></table>
 </section>
 
-<section><h2>Links</h2><div class="links"><a class="btn" href="https://docs.google.com/spreadsheets/d/1jcOW8E9k-_3IaDA458qoxKh_49oPYQluWO2pk144yH0/edit?usp=sharing" target="_blank" rel="noopener">Economy model (Google Sheets)</a><a class="btn" href="index.html">Rogue Deck design &amp; balancing</a><a class="btn" href="ab-test.html">A/B test plan</a></div></section>
+<section><h2>Links</h2><div class="links"><a class="btn" href="case-study.html">Case study</a><a class="btn" href="ab-test-plan.html">A/B test plan</a><a class="btn" href="https://docs.google.com/spreadsheets/d/1jcOW8E9k-_3IaDA458qoxKh_49oPYQluWO2pk144yH0/edit?usp=sharing" target="_blank" rel="noopener">Economy model spreadsheet</a><a class="btn" href="https://github.com/MomSesImSpcl/MarkHerdt.dev/tree/main/tools/economy-sim" target="_blank" rel="noopener">Simulation code</a><a class="btn" href="https://momsesimspcl.itch.io/rogue-deck/download/fBLCvmYwULnReEncoBvvq3vEXXSxOpyujAYdBOfm" target="_blank" rel="noopener">Download build</a></div></section>
 </main><footer>© 2026 Mark Herdt</footer></body></html>
