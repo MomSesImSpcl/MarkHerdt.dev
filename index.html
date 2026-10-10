@@ -55,8 +55,7 @@ h2{font-size:1.8rem;margin-bottom:8px}
 .chip{font-size:.75rem;padding:3px 9px;border-radius:99px;background:var(--surface2);color:var(--muted);border:1px solid var(--border)}
 .chip.hi{color:var(--accent);border-color:rgba(94,234,212,.4)}
 .links{display:flex;gap:16px;font-weight:600;font-size:.92rem}
-.games{grid-template-columns:repeat(3,1fr)}
-@media(max-width:900px){.games{grid-template-columns:1fr 1fr}}
+.games{grid-template-columns:1fr 1fr}
 @media(max-width:600px){.games{grid-template-columns:1fr}}
 .vid img{aspect-ratio:460/215;object-fit:cover}
 .btn.small{padding:8px 14px;font-size:.88rem;margin-top:14px;align-self:flex-start}
@@ -96,6 +95,13 @@ h2{font-size:1.8rem;margin-bottom:8px}
 .games .case .tags{padding-top:0;padding-bottom:0}
 .games .case .foot{padding-top:0;padding-bottom:24px}
 .games .case .tags .chips{margin-top:0}
+.games .featured{grid-column:1/-1;grid-template-columns:3fr 2fr}
+.games .featured .vid{grid-column:1;grid-row:1/-1;justify-content:center}
+.games .featured .vid::before{content:"";position:absolute;inset:-30px;background:var(--cover) center/cover;filter:blur(24px) brightness(.45)}
+.games .featured .vid>*{position:relative}
+.games .featured .vid .play{position:absolute}
+.games .featured .body{grid-column:2}
+@media(max-width:700px){.games .featured{grid-template-columns:1fr}.games .featured .vid{grid-row:auto}.games .featured .body{grid-column:1}}
 .case .kicker{font-family:"JetBrains Mono",monospace;font-size:.8rem;color:var(--accent2);margin-bottom:6px}
 .case ul{list-style:none;margin:12px 0 4px;color:var(--muted);font-size:.92rem}
 .case li{padding:4px 0 4px 18px;position:relative}
@@ -120,9 +126,9 @@ footer{padding:30px 0;text-align:center;color:var(--muted);font-size:.85rem;bord
 </div></nav>
 
 <header id="top"><div class="wrap">
-  <p class="tag">// Gameplay · Systems · Technical Design · Germany</p>
+  <p class="tag">// Game Designer & Unity Developer · Gameplay & Systems Design · Germany</p>
   <h1>Hi, I'm Mark Herdt.<br><span class="grad">I make games.</span></h1>
-  <p class="lead">Gameplay and systems designer with 7 years of Unity and C# experience. I design mechanics, game systems and balance, and program them myself, from the first prototype to release. Creator of Watermelon Game, a Steam release with over 1,000 player reviews and a Very Positive rating.</p>
+  <p class="lead">Game designer and Unity developer with 7 years of experience designing, prototyping, and shipping games. I focus on creating engaging gameplay mechanics and interconnected systems, refining them through extensive playtesting and player feedback. Creator of Watermelon Game, a Steam release with over 1,000 player reviews and a Very Positive rating.</p>
   <div class="btns">
     <a class="btn primary" href="#projects">Games &amp; case studies</a>
     <a class="btn" href="https://github.com/MomSesImSpcl" target="_blank" rel="noopener">GitHub</a>
@@ -136,8 +142,8 @@ footer{padding:30px 0;text-align:center;color:var(--muted);font-size:.85rem;bord
   <p class="sub">Games I designed and programmed end to end, and the mechanics and systems behind them.</p>
   <div class="grid games">
 
-    <article class="card case">
-      <div class="vid" data-id="RMRHCmWvCqo" role="button" tabindex="0" aria-label="Play trailer"><img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2658820/header.jpg" alt="Watermelon Game key art"><span class="play">▶</span></div>
+    <article class="card case featured">
+      <div class="vid" style="--cover:url(https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2658820/header.jpg)" data-id="RMRHCmWvCqo" role="button" tabindex="0" aria-label="Play trailer"><img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2658820/header.jpg" alt="Watermelon Game key art"><span class="play">▶</span></div>
       <div class="body">
         <p class="kicker">Gameplay &amp; Mechanics</p>
         <h3>Watermelon Game</h3>
@@ -282,11 +288,10 @@ footer{padding:30px 0;text-align:center;color:var(--muted);font-size:.85rem;bord
 <section id="skills"><div class="wrap">
   <h2>Skills</h2>
   <div class="skills">
-    <div class="skill design"><h4>Gameplay &amp; Mechanics</h4><div class="chips"><span class="chip hi">Core loops</span><span class="chip">Prototyping</span><span class="chip">Playtesting</span></div></div>
-    <div class="skill design"><h4>Systems Design</h4><div class="chips"><span class="chip hi">Balancing</span><span class="chip">Probability &amp; rarity</span><span class="chip">Economy</span></div></div>
-    <div class="skill design"><h4>Technical Design</h4><div class="chips"><span class="chip hi">Gameplay programming</span><span class="chip">Editor tooling</span><span class="chip">Multiplayer</span></div></div>
-    <div class="skill"><h4>Engine &amp; Languages</h4><div class="chips"><span class="chip hi">Unity</span><span class="chip hi">C#</span><span class="chip">.NET</span><span class="chip">WebGL</span></div></div>
-    <div class="skill"><h4>Tools</h4><div class="chips"><span class="chip">JetBrains Rider</span><span class="chip">Git / GitHub</span><span class="chip">Steamworks</span></div></div>
+    <div class="skill design"><h4>Game Design</h4><div class="chips"><span class="chip hi">Gameplay mechanics</span><span class="chip">Core loop design</span><span class="chip">Systems design</span><span class="chip">Game balancing</span><span class="chip">Playtesting &amp; iteration</span></div></div>
+    <div class="skill design"><h4>Design Workflow</h4><div class="chips"><span class="chip hi">Rapid prototyping</span><span class="chip">Playtesting</span><span class="chip">Gameplay telemetry</span><span class="chip">Balancing</span><span class="chip">Player feedback analysis</span></div></div>
+    <div class="skill"><h4>Engine &amp; Languages</h4><div class="chips"><span class="chip hi">Unity</span><span class="chip hi">C#</span><span class="chip">.NET</span><span class="chip">Mobile</span><span class="chip">WebGL</span></div></div>
+    <div class="skill"><h4>Tools</h4><div class="chips"><span class="chip">JetBrains Rider</span><span class="chip">Git / GitHub</span><span class="chip">Steamworks</span><span class="chip">Google Sheets</span></div></div>
     <div class="skill"><h4>Shipping</h4><div class="chips"><span class="chip">Steam</span><span class="chip">Play Store</span><span class="chip">Microsoft Store</span><span class="chip">itch.io</span></div></div>
   </div>
 </div></section>
