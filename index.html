@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Mark Herdt – Game Designer &amp; Programmer</title>
-<meta name="description" content="Mark Herdt – Unity & C# game designer &amp; programmer from Germany. Portfolio, projects and resume.">
-<meta property="og:title" content="Mark Herdt – Game Designer &amp; Programmer">
-<meta property="og:description" content="Unity &amp; C# game developer from Germany. Creator of Watermelon Game on Steam.">
+<title>Mark Herdt – Gameplay &amp; Systems Designer</title>
+<meta name="description" content="Mark Herdt – gameplay &amp; systems designer from Germany who builds his games in Unity &amp; C#. Games, design case studies and resume.">
+<meta property="og:title" content="Mark Herdt – Gameplay &amp; Systems Designer">
+<meta property="og:description" content="Gameplay &amp; systems designer from Germany. Creator of Watermelon Game on Steam.">
 <meta property="og:image" content="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2658820/header.jpg">
 <meta property="og:url" content="https://markherdt.dev/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Crect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%235eead4%22/%3E%3Ctext x=%2250%22 y=%2268%22 font-size=%2252%22 font-family=%22Arial%22 font-weight=%22bold%22 text-anchor=%22middle%22 fill=%22%230e1116%22%3EMH%3C/text%3E%3C/svg%3E">
@@ -88,11 +88,13 @@ h2{font-size:1.8rem;margin-bottom:8px}
 .facts b{color:var(--text);font-weight:600}.facts span{color:var(--muted);text-align:right}
 @media(max-width:760px){.about{grid-template-columns:1fr}}
 .contact{text-align:center}
-.cases{grid-template-columns:repeat(3,1fr)}
-@media(max-width:900px){.cases{grid-template-columns:1fr}}
 .case .body{padding:24px}
 .case p{flex:0 0 auto}
 .case .chips{margin-top:auto;padding-top:14px}
+.games .case{display:grid;grid-row:span 3;grid-template-rows:subgrid;row-gap:0}
+.games .case .body{padding-bottom:0}
+.games .case .foot{padding-top:0;padding-bottom:24px}
+.games .case .foot .chips{margin-top:0}
 .case .kicker{font-family:"JetBrains Mono",monospace;font-size:.8rem;color:var(--accent2);margin-bottom:6px}
 .case ul{list-style:none;margin:12px 0 4px;color:var(--muted);font-size:.92rem}
 .case li{padding:4px 0 4px 18px;position:relative}
@@ -107,8 +109,7 @@ footer{padding:30px 0;text-align:center;color:var(--muted);font-size:.85rem;bord
 <nav><div class="wrap">
   <a class="logo" href="#top">mark<span>.herdt</span>()</a>
   <ul>
-    <li><a href="#projects">Games</a></li>
-    <li><a href="#design">Design</a></li>
+    <li><a href="#projects">Games &amp; Design</a></li>
     <li><a href="#tools">Unity Tools</a></li>
     <li><a href="#experience">Experience</a></li>
     <li><a href="#skills">Skills</a></li>
@@ -118,12 +119,11 @@ footer{padding:30px 0;text-align:center;color:var(--muted);font-size:.85rem;bord
 </div></nav>
 
 <header id="top"><div class="wrap">
-  <p class="tag">// Game Designer &amp; Programmer · Systems &amp; Balancing · Germany</p>
+  <p class="tag">// Gameplay · Systems · Technical Design · Germany</p>
   <h1>Hi, I'm Mark Herdt.<br><span class="grad">I make games.</span></h1>
-  <p class="lead">Game designer and Unity developer with 7 years of experience creating, balancing, and shipping games. Experienced in gameplay systems, probability-driven mechanics, multiplayer design, and player-focused iteration. Creator of Watermelon Game, a Steam release with over 1,000 player reviews and a Very Positive rating.</p>
+  <p class="lead">Gameplay and systems designer with 7 years of Unity and C# experience. I design mechanics, game systems and balancing, and program them myself, from the first prototype to release. Creator of Watermelon Game, a Steam release with over 1,000 player reviews and a Very Positive rating.</p>
   <div class="btns">
-    <a class="btn primary" href="#design">Design case studies</a>
-    <a class="btn" href="#projects">Games</a>
+    <a class="btn primary" href="#projects">Games &amp; case studies</a>
     <a class="btn" href="https://github.com/MomSesImSpcl" target="_blank" rel="noopener">GitHub</a>
     <a class="btn" href="https://momsesimspcl.itch.io/" target="_blank" rel="noopener">itch.io</a>
     <a class="btn" href="Mark_Herdt_CV.pdf" download="Mark_Herdt_CV.pdf" target="_blank" rel="noopener">Download CV</a>
@@ -131,22 +131,33 @@ footer{padding:30px 0;text-align:center;color:var(--muted);font-size:.85rem;bord
 </div></header>
 
 <section id="projects"><div class="wrap">
-  <h2>Games</h2>
-  <p class="sub">Games I designed and programmed end to end.</p>
+  <h2>Games &amp; Design Case Studies</h2>
+  <p class="sub">Games I designed and programmed end to end, and the mechanics and systems behind them.</p>
   <div class="grid games">
 
-    <article class="card">
+    <article class="card case">
       <div class="vid" data-id="RMRHCmWvCqo" role="button" tabindex="0" aria-label="Play trailer"><img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2658820/header.jpg" alt="Watermelon Game key art"><span class="play">▶</span></div>
       <div class="body">
+        <p class="kicker">Gameplay &amp; Mechanics</p>
         <h3>Watermelon Game</h3>
         <p>A casual physics puzzle game: drop and combine matching fruits to score points and beat your high score, includes a multiplayer mode. Built solo, released on Steam in November 2023 and also published on the Microsoft Store.</p>
+        <ul>
+          <li>Three skills that change up the gameplay</li>
+          <li>Multiplayer with its own stone fruit mechanic</li>
+          <li>Golden fruit and combo counter</li>
+          <li>Mechanics added on top of Suika Game</li>
+        </ul>
+      </div>
+      <div class="body foot">
         <div class="chips">
           <span class="chip hi">Steam · Very Positive (91%)</span>
-          <span class="chip">1,000+ reviews</span>
+          <span class="chip hi">Mechanics</span><span class="chip">Physics puzzle</span><span class="chip">Multiplayer</span>
           <span class="chip">Unity</span><span class="chip">C#</span>
-          <span class="chip">Multiplayer</span>
+          <span class="chip">1,000+ reviews</span>
         </div>
-        <div class="links">
+        <a class="btn small" href="games/watermelon-game/index.html">Case study →</a>
+        <a class="btn small" href="games/watermelon-game/key-design-decisions.html" style="margin-top:8px">Key design decisions →</a>
+        <div class="links" style="margin-top:16px">
           <a href="https://store.steampowered.com/app/2658820/Watermelon_Game/" target="_blank" rel="noopener">Steam page →</a>
           <a href="https://apps.microsoft.com/detail/9pbqvg3xw0nq" target="_blank" rel="noopener">Microsoft Store →</a>
           <a href="https://momsesimspcl.itch.io/watermelon-game" target="_blank" rel="noopener">itch.io →</a>
@@ -154,76 +165,57 @@ footer{padding:30px 0;text-align:center;color:var(--muted);font-size:.85rem;bord
       </div>
     </article>
 
-    <article class="card">
+    <article class="card case">
       <div class="vid" data-id="0nubLGzscEs" role="button" tabindex="0" aria-label="Play trailer"><img src="images/rogue-deck.jpg" alt="Rogue Deck cover art"><span class="play">▶</span></div>
       <div class="body">
+        <p class="kicker">Systems &amp; Balancing</p>
         <h3>Rogue Deck <span class="chip hi" style="vertical-align:middle">In development</span></h3>
         <p>My current project: a multiplayer card game, simple like UNO but with deck building depth similar to YuGiOh and roguelike elements. Not released yet, but you can download the current build.</p>
-        <div class="chips"><span class="chip">Unity</span><span class="chip">C#</span><span class="chip">Card game</span><span class="chip">Roguelike</span><span class="chip">Multiplayer</span></div>
-        <div class="links"><a href="https://momsesimspcl.itch.io/rogue-deck/download/fBLCvmYwULnReEncoBvvq3vEXXSxOpyujAYdBOfm" target="_blank" rel="noopener">Download build →</a></div>
+        <ul>
+          <li>Every card in the deck has a unique effect</li>
+          <li>A second deck creates a roguelike progression, with further combination possibilities</li>
+          <li>Balancing from logged playtests, with a downloadable spreadsheet</li>
+          <li>Rarity and probability calculations</li>
+          <li>Effect strength comparisons</li>
+        </ul>
+      </div>
+      <div class="body foot">
+        <div class="chips">
+          <span class="chip hi">Balancing</span>
+          <span class="chip">Economy</span>
+          <span class="chip">Roguelike</span><span class="chip">Multiplayer</span>
+          <span class="chip">Unity</span><span class="chip">C#</span>
+        </div>
+        <a class="btn small" href="games/rogue-deck/">Case study →</a>
+        <a class="btn small" href="games/rogue-deck/liveops.html" style="margin-top:8px">LiveOps &amp; economy →</a>
+        <a class="btn small" href="games/rogue-deck/ab-test.html" style="margin-top:8px">A/B test plan →</a>
+        <div class="links" style="margin-top:16px"><a href="https://momsesimspcl.itch.io/rogue-deck/download/fBLCvmYwULnReEncoBvvq3vEXXSxOpyujAYdBOfm" target="_blank" rel="noopener">Download build →</a></div>
       </div>
     </article>
 
-    <article class="card">
+    <article class="card case">
       <div class="vid" data-id="miJXlEMbDK8" role="button" tabindex="0" aria-label="Play trailer"><img src="images/queue-connect.jpg" alt="Queue-Connect robot"><span class="play">▶</span></div>
       <div class="body">
+        <p class="kicker">Core Loop &amp; Controls</p>
         <h3>Queue-Connect</h3>
         <p>A mobile arcade game: repair robots on a speeding conveyor belt by tapping the right parts before they roll away. Started as our Global Game Jam 2020 entry, then polished with a fellow School of Games student and published on the Google Play Store (no longer listed). Still available on itch.io.</p>
-        <div class="chips"><span class="chip">Unity</span><span class="chip">C#</span><span class="chip">Mobile</span><span class="chip">Google Play</span></div>
-        <div class="links"><a href="https://momsesimspcl.itch.io/queue-connect" target="_blank" rel="noopener">Play on itch.io →</a></div>
+        <ul>
+          <li>Redesigned a PC jam prototype for two-thumb landscape play</li>
+          <li>Rising belt speed, decoy parts and risk/reward buffs</li>
+          <li>Short score runs built for "one more try" mobile sessions</li>
+        </ul>
+      </div>
+      <div class="body foot">
+        <div class="chips">
+          <span class="chip hi">Core loop</span><span class="chip">Mobile</span>
+          <span class="chip">Google Play</span>
+          <span class="chip">Team project</span>
+          <span class="chip">Unity</span><span class="chip">C#</span>
+        </div>
+        <a class="btn small" href="games/queue-connect.html">Case study →</a>
+        <div class="links" style="margin-top:16px"><a href="https://momsesimspcl.itch.io/queue-connect" target="_blank" rel="noopener">Play on itch.io →</a></div>
       </div>
     </article>
-
-  </div>
-</div></section>
-
-<section id="design"><div class="wrap">
-  <h2>Design Case Studies</h2>
-  <p class="sub">How I design, measure and iterate systems, with the numbers and decisions behind them.</p>
-  <div class="grid cases">
-
-    <article class="card case"><div class="body">
-      <p class="kicker">Post-Launch Iteration</p>
-      <h3>Watermelon Game</h3>
-      <p>What 1,000+ Steam reviews taught me, and the design decisions I changed because of them.</p>
-      <ul>
-        <li>Art update dropped the review score, so I reverted it</li>
-        <li>Reworked my approach to achievements after player feedback</li>
-        <li>Multiplayer mode for a casual physics puzzle game</li>
-      </ul>
-      <div class="chips"><span class="chip hi">Player feedback</span><span class="chip">Iteration</span><span class="chip">Progression</span></div>
-      <a class="btn small" href="games/watermelon-game/index.html">Case study →</a>
-      <a class="btn small" href="games/watermelon-game/key-design-decisions.html">Key design decisions →</a>
-    </div></article>
-
-    <article class="card case"><div class="body">
-      <p class="kicker">Systems &amp; Balancing</p>
-      <h3>Rogue Deck</h3>
-      <p>A card game that stays as simple as UNO while also including roguelike deck-building depth.</p>
-      <ul>
-        <li>Rarity and probability for card and Rogue offers</li>
-        <li>Effect strength comparisons</li>
-        <li>Balancing from logged playtests</li>
-        <li>Downloadable balancing spreadsheet</li>
-      </ul>
-      <div class="chips"><span class="chip hi">Systems design</span><span class="chip">Probability</span><span class="chip">Economy</span><span class="chip">Spreadsheets</span></div>
-      <a class="btn small" href="games/rogue-deck/">Case study →</a>
-      <a class="btn small" href="games/rogue-deck/liveops.html" style="margin-top:8px">LiveOps &amp; economy →</a>
-      <a class="btn small" href="games/rogue-deck/ab-test.html" style="margin-top:8px">A/B test plan →</a>
-    </div></article>
-
-    <article class="card case"><div class="body">
-      <p class="kicker">Mobile &amp; Team Design</p>
-      <h3>Queue-Connect</h3>
-      <p>From a Global Game Jam prototype to a published mobile arcade game, built with a teammate.</p>
-      <ul>
-        <li>Redesigned a PC jam prototype for two-thumb landscape play</li>
-        <li>Rising belt speed, decoy parts and risk/reward buffs</li>
-        <li>Short score runs built for "one more try" mobile sessions</li>
-      </ul>
-      <div class="chips"><span class="chip hi">Mobile</span><span class="chip">Core loop</span><span class="chip">Teamwork</span></div>
-      <a class="btn small" href="games/queue-connect.html">Case study →</a>
-    </div></article>
 
   </div>
 </div></section>
@@ -254,14 +246,14 @@ footer{padding:30px 0;text-align:center;color:var(--muted);font-size:.85rem;bord
 
 <section id="experience"><div class="wrap">
   <h2>Experience &amp; Education</h2>
-  <p class="sub">&nbsp;</p>
+  <p class="sub">From game programming school to software development to my own Steam release.</p>
   <div class="timeline">
     <div class="item">
       <div class="when">2023 – today</div>
       <h3>Independent Game Developer</h3>
       <div class="org">Self-employed projects</div>
-      <p>Designed, programmed and published Watermelon Game on Steam (Very Positive, 1,000+ reviews). Currently developing Rogue Deck and open-source Unity plugins.</p>
-      <div class="chips"><span class="chip">Unity</span><span class="chip">.NET</span><span class="chip">C#</span><span class="chip">Game Design</span><span class="chip">Marketing</span></div>
+      <p>Developed Watermelon Game and released it on Steam (Very Positive, 1,000+ reviews). Currently working on Rogue Deck and open-source Unity plugins.</p>
+      <div class="chips"><span class="chip">Gameplay design</span><span class="chip">Systems design</span><span class="chip">Balancing</span><span class="chip">Unity</span><span class="chip">C#</span></div>
     </div>
     <div class="item">
       <div class="when">2021 – 2023</div>
@@ -275,19 +267,18 @@ footer{padding:30px 0;text-align:center;color:var(--muted);font-size:.85rem;bord
       <h3>Game Programmer (Education)</h3>
       <div class="org"><a href="https://schoolofgames.com/en/" target="_blank" rel="noopener">School of Games</a>, Cologne - Germany</div>
       <p>Two-year game programming and design education, where we had regular game jams, working in teams with multiple artists and programmers, graduated 2021.</p>
-      <div class="chips"><span class="chip">Unity</span><span class="chip">Game Design</span><span class="chip">.NET</span><span class="chip">C#</span></div>
+      <div class="chips"><span class="chip">Game Programming</span><span class="chip">Game Design</span><span class="chip">Unity</span><span class="chip">.NET</span><span class="chip">C#</span></div>
     </div>
   </div>
 </div></section>
 
 <section id="skills"><div class="wrap">
   <h2>Skills</h2>
-  <p class="sub">&nbsp;</p>
   <div class="skills">
-    <div class="skill design"><h4>Game Design</h4><div class="chips"><span class="chip hi">Systems design</span><span class="chip">Game balancing</span><span class="chip">Probability &amp; rarity</span><span class="chip">Core loops</span><span class="chip">Playtesting</span><span class="chip">Post-launch iteration</span></div></div>
-    <div class="skill design"><h4>LiveOps &amp; Economy</h4><div class="chips"><span class="chip">LiveOps planning</span><span class="chip">Economy simulation</span><span class="chip">Experiment design</span><span class="chip">Retention metrics</span><span class="chip">Balancing spreadsheets</span></div></div>
-    <div class="skill"><h4>Engine</h4><div class="chips"><span class="chip hi">Unity</span><span class="chip">Editor tooling</span><span class="chip">WebGL</span><span class="chip">Multiplayer</span></div></div>
-    <div class="skill"><h4>Languages</h4><div class="chips"><span class="chip">C#</span><span class="chip">.NET</span></div></div>
+    <div class="skill design"><h4>Gameplay &amp; Mechanics</h4><div class="chips"><span class="chip hi">Core loops</span><span class="chip">Prototyping</span><span class="chip">Playtesting</span></div></div>
+    <div class="skill design"><h4>Systems Design</h4><div class="chips"><span class="chip hi">Balancing</span><span class="chip">Probability &amp; rarity</span><span class="chip">Economy</span></div></div>
+    <div class="skill design"><h4>Technical Design</h4><div class="chips"><span class="chip hi">Gameplay programming</span><span class="chip">Editor tooling</span><span class="chip">Multiplayer</span></div></div>
+    <div class="skill"><h4>Engine &amp; Languages</h4><div class="chips"><span class="chip hi">Unity</span><span class="chip hi">C#</span><span class="chip">.NET</span><span class="chip">WebGL</span></div></div>
     <div class="skill"><h4>Tools</h4><div class="chips"><span class="chip">JetBrains Rider</span><span class="chip">Git / GitHub</span><span class="chip">Steamworks</span></div></div>
     <div class="skill"><h4>Shipping</h4><div class="chips"><span class="chip">Steam</span><span class="chip">Play Store</span><span class="chip">Microsoft Store</span><span class="chip">itch.io</span></div></div>
   </div>
@@ -298,11 +289,10 @@ footer{padding:30px 0;text-align:center;color:var(--muted);font-size:.85rem;bord
     <h2>About me</h2>
     <p>I'm a game developer from Germany. I studied game programming and design at the School of Games in Cologne - Germany, then worked for two years as a software developer at 5Minds IT-Solutions GmbH & Co. KG, building .NET management software for solar parks as part of a team of about 50.</p>
     <p>Since 2023 I've focused fully on my own games: I took Watermelon Game from idea to a Steam release with over a thousand player reviews, and I'm now building Rogue Deck alongside open-source Unity tools.</p>
-    <p>I'm looking for a team where I can bring that end-to-end experience to bigger projects.</p>
   </div>
   <ul class="facts">
     <li><b>Location</b><span>Germany</span></li>
-    <li><b>Focus</b><span>Game &amp; systems design,<br>gameplay programming</span></li>
+    <li><b>Focus</b><span>Gameplay, systems, technical design &amp; programming</span></li>
     <li><b>Unity / C#</b><span>~7 years</span></li>
     <li><b>Languages</b><span>German, English</span></li>
   </ul>
@@ -310,7 +300,7 @@ footer{padding:30px 0;text-align:center;color:var(--muted);font-size:.85rem;bord
 
 <section id="contact" class="contact"><div class="wrap">
   <h2>Let's work together</h2>
-  <p class="sub">Open to game design and game programming roles. I'm happy to share builds and/or code samples.</p>
+  <p class="sub">Open to Gameplay, Systems and Technical Designer roles. I'm happy to share builds and/or code samples.</p>
   <div class="btns">
     <a class="btn primary" href="mailto:herdt.mark@gmail.com">herdt.mark@gmail.com</a>
     <!-- <a class="btn" href="https://www.linkedin.com/in/YOUR-PROFILE" target="_blank" rel="noopener">LinkedIn</a> -->
