@@ -91,10 +91,11 @@ h2{font-size:1.8rem;margin-bottom:8px}
 .case .body{padding:24px}
 .case p{flex:0 0 auto}
 .case .chips{margin-top:auto;padding-top:14px}
-.games .case{display:grid;grid-row:span 3;grid-template-rows:subgrid;row-gap:0}
+.games .case{display:grid;grid-row:span 4;grid-template-rows:subgrid;row-gap:0}
 .games .case .body{padding-bottom:0}
+.games .case .tags{padding-top:0;padding-bottom:0}
 .games .case .foot{padding-top:0;padding-bottom:24px}
-.games .case .foot .chips{margin-top:0}
+.games .case .tags .chips{margin-top:0}
 .case .kicker{font-family:"JetBrains Mono",monospace;font-size:.8rem;color:var(--accent2);margin-bottom:6px}
 .case ul{list-style:none;margin:12px 0 4px;color:var(--muted);font-size:.92rem}
 .case li{padding:4px 0 4px 18px;position:relative}
@@ -121,7 +122,7 @@ footer{padding:30px 0;text-align:center;color:var(--muted);font-size:.85rem;bord
 <header id="top"><div class="wrap">
   <p class="tag">// Gameplay · Systems · Technical Design · Germany</p>
   <h1>Hi, I'm Mark Herdt.<br><span class="grad">I make games.</span></h1>
-  <p class="lead">Gameplay and systems designer with 7 years of Unity and C# experience. I design mechanics, game systems and balancing, and program them myself, from the first prototype to release. Creator of Watermelon Game, a Steam release with over 1,000 player reviews and a Very Positive rating.</p>
+  <p class="lead">Gameplay and systems designer with 7 years of Unity and C# experience. I design mechanics, game systems and balance, and program them myself, from the first prototype to release. Creator of Watermelon Game, a Steam release with over 1,000 player reviews and a Very Positive rating.</p>
   <div class="btns">
     <a class="btn primary" href="#projects">Games &amp; case studies</a>
     <a class="btn" href="https://github.com/MomSesImSpcl" target="_blank" rel="noopener">GitHub</a>
@@ -148,13 +149,15 @@ footer{padding:30px 0;text-align:center;color:var(--muted);font-size:.85rem;bord
           <li>Mechanics added on top of Suika Game</li>
         </ul>
       </div>
-      <div class="body foot">
+      <div class="body tags">
         <div class="chips">
           <span class="chip hi">Steam · Very Positive (91%)</span>
           <span class="chip hi">Mechanics</span><span class="chip">Physics puzzle</span><span class="chip">Multiplayer</span>
           <span class="chip">Unity</span><span class="chip">C#</span>
           <span class="chip">1,000+ reviews</span>
         </div>
+      </div>
+      <div class="body foot">
         <a class="btn small" href="games/watermelon-game/index.html">Case study →</a>
         <a class="btn small" href="games/watermelon-game/key-design-decisions.html" style="margin-top:8px">Key design decisions →</a>
         <div class="links" style="margin-top:16px">
@@ -179,13 +182,15 @@ footer{padding:30px 0;text-align:center;color:var(--muted);font-size:.85rem;bord
           <li>Effect strength comparisons</li>
         </ul>
       </div>
-      <div class="body foot">
+      <div class="body tags">
         <div class="chips">
           <span class="chip hi">Balancing</span>
           <span class="chip">Economy</span>
           <span class="chip">Roguelike</span><span class="chip">Multiplayer</span>
           <span class="chip">Unity</span><span class="chip">C#</span>
         </div>
+      </div>
+      <div class="body foot">
         <a class="btn small" href="games/rogue-deck/">Case study →</a>
         <a class="btn small" href="games/rogue-deck/liveops.html" style="margin-top:8px">LiveOps &amp; economy →</a>
         <a class="btn small" href="games/rogue-deck/ab-test.html" style="margin-top:8px">A/B test plan →</a>
@@ -205,13 +210,15 @@ footer{padding:30px 0;text-align:center;color:var(--muted);font-size:.85rem;bord
           <li>Short score runs built for "one more try" mobile sessions</li>
         </ul>
       </div>
-      <div class="body foot">
+      <div class="body tags">
         <div class="chips">
           <span class="chip hi">Core loop</span><span class="chip">Mobile</span>
           <span class="chip">Google Play</span>
           <span class="chip">Team project</span>
           <span class="chip">Unity</span><span class="chip">C#</span>
         </div>
+      </div>
+      <div class="body foot">
         <a class="btn small" href="games/queue-connect.html">Case study →</a>
         <div class="links" style="margin-top:16px"><a href="https://momsesimspcl.itch.io/queue-connect" target="_blank" rel="noopener">Play on itch.io →</a></div>
       </div>
