@@ -47,7 +47,7 @@ p+p{margin-top:10px}
 <tr><td>Score Multiplier: Hearts ×5</td><td><span class="dot" style="background:#a78bfa"></span>Legendary</td><td>40</td><td>+68</td><td>+28</td><td>1.7×</td></tr></table>
 <p class="note">Expected gain: extra points the effect approximately earns over the rest of the match. Net gain: gain minus cost. Payback: how many times the effect earns back its cost. All values from the <a href="https://docs.google.com/spreadsheets/d/1dw4X00niFlxCuj96TsYGd5FnsYzix9_52m8x8lmlegU/edit?usp=sharing" target="_blank" rel="noopener">balancing spreadsheet</a>.</p>
 <p>For its price, the Common is as good as the Rare and better than the Legendary. But you can only own a limited number of Rogue effects, and per effect the Common adds the fewest points. On the other hand, it's cheap, so your score stays higher and you unlock the next Rogue slot sooner.</p>
-<p>Which choice wins over a whole match can't be answered by the model alone. That's why it's tested with real players, and why final score is one of the guardrails.</p>
+<p>The model alone can't tell which choice wins over a whole match, so I'd test it with real players. That's also why final score is one of the guardrails.</p>
 </section>
 
 <section><h2>2. Hypothesis &amp; variant</h2>
@@ -91,7 +91,7 @@ p+p{margin-top:10px}
 
 <section><h2>5. Sample size &amp; duration</h2>
 <div class="ladder">
-<div class="rung"><b>Goal</b><div>Players buy more of the Commons they're offered, and final scores stay the same or go up</div><span>Final score dropping, while common purchases rise, would mean that the players are making worse decisions</span></div>
+<div class="rung"><b>Goal</b><div>Players buy more of the Commons they're offered, and final scores stay the same or go up</div><span>If Common purchases rise but final scores drop, players are making worse decisions</span></div>
 <div class="rung"><b>Players</b><div>Enough different players, not just enough offers</div><span>One player sees many offers and tends to decide the same way each time. So 1,000 offers from 20 players say less than 1,000 offers from 500 players.</span></div>
 <div class="rung"><b>Duration</b><div>14 days</div><span>Covers two full weeks of weekdays and weekends, and gives the first excitement about the new shop time to wear off.</span></div>
 </div>
@@ -103,11 +103,6 @@ p+p{margin-top:10px}
 <li><b>Primary metric.</b> Players in B buy clearly more of the Commons they're offered than players in A. The rise also has to be big enough to be worth shipping.</li>
 <li><b>Guardrails.</b> Final scores and D7 retention must not clearly drop.</li>
 </ol>
-<table><tr><th>Guardrail</th><th>Passes when</th></tr>
-<tr><td>Final score</td><td>Scores in B are not clearly lower than in A</td></tr>
-<tr><td>D7 retention</td><td>No clear drop</td></tr></table>
-</section>
-
 <h3>Follow-up test</h3>
 <p>If players still rarely buy Commons after the release, the next test changes the price instead, for example 5% of your score instead of 10%. It uses the same metrics and guardrails.</p>
 </section>
