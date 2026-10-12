@@ -1,4 +1,4 @@
-"""Rogue Deck – collection progress simulation (Monte Carlo).
+"""Rogue Deck collection progress simulation (Monte Carlo).
 
 Opens booster packs month by month for several player profiles and reports how
 much of the collection each profile owns: all effect variants (any art) and all
@@ -12,7 +12,7 @@ Usage:
     python collection_sim.py --packs Casual=19.1 Regular=38.6 --csv out.csv
 
 Inputs mirror the economy model (Google Sheet):
-  * packs per month per profile  -> Profiles sheet, "TOTAL PACKS PER MONTH"
+  * packs per month per profile  -> Profiles sheet, "Total packs per month"
   * rarity weights 8/4/2/1         -> Pack Odds sheet (same as in-match Rogue offers)
   * art weights 90/8.9/1/0.1 %     -> Pack Odds sheet
   * pack layout: 1 Rogue card + 4 playing cards
