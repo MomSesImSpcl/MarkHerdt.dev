@@ -1,17 +1,18 @@
 #!/usr/bin/env python3
 """
-Rogue Deck – A/B test plan and analysis: "Show expected payback in the Rogue shop"
+Rogue Deck A/B test plan and analysis: "Show expected payback in the Rogue shop"
 
-Everything the case study page shows comes from this script:
+Analysis code for the test planned on the A/B test page:
 
-  1. Baseline        real playtest logs (6 of 266 Rogue purchases were Common)
-  2. Power           purchases and players needed per group, adjusted for clustering
+  1. Baseline        real playtest logs (6 of ~426 Common offers were bought,
+                     counted on turns where the player bought a Rogue effect)
+  2. Power           Common offers and players needed per group, adjusted for clustering
   3. Duration        how long the test has to run with the assumed traffic
   4. Simulation      a SIMULATED experiment (the game is not live yet), so the
                      analysis pipeline can be shown end to end
   5. Analysis        sample ratio check, primary KPI with a cluster-robust
                      confidence interval and a player-level bootstrap,
-                     guardrails, novelty check
+                     guardrails (final score, D7 retention), novelty check
   6. Decision        ship / don't ship, following the pre-registered rules
 
 Only the baseline numbers are real. Traffic, retention, intra-player
@@ -33,27 +34,29 @@ N = NormalDist()
 # ---------------------------------------------------------------------------
 # 1. Baseline from the real playtest logs (20 matches, 60 player-matches)
 # ---------------------------------------------------------------------------
-LOG_PURCHASES = 266
+LOG_PURCHASE_TURNS = 266              # turns on which a player bought a Rogue effect
 LOG_COMMON_PURCHASES = 6
 LOG_PLAYER_MATCHES = 10 * 2 + 10 * 4  # 10 two-player + 10 four-player matches
+OFFERS_PER_TURN = 3
 COMMON_OFFER_SHARE = 8 / 15           # rarity weights 8/4/2/1 -> 53.3% of offers
+# Common offers seen on purchase turns: 266 x 3 x 8/15 = ~426
+LOG_COMMON_OFFERS = round(LOG_PURCHASE_TURNS * OFFERS_PER_TURN * COMMON_OFFER_SHARE)
 
 # ---------------------------------------------------------------------------
 # Test design (decided before the test starts)
 # ---------------------------------------------------------------------------
 ALPHA = 0.05                 # two-sided, primary KPI
 POWER = 0.80
-GUARDRAIL_ALPHA = 0.05       # one-sided non-inferiority checks (90% CI)
-MDE_ABS = 0.015              # smallest change worth acting on: +1.5 pp Common share
+GUARDRAIL_ALPHA = 0.05       # one-sided guardrail checks (90% CI)
+MDE_ABS = 0.015              # smallest change worth acting on: +1.5 pp Common purchase rate
 MIN_DAYS = 14                # two full weekly cycles, and room to see novelty fade
 
-# Guardrails: (name, direction, margin). Direction "max_increase" / "max_decrease"
-# is relative (fraction of control); "abs_band" / "abs_drop" are absolute.
+# Guardrails: (name, margin). The margin is a relative drop (fraction of control).
+# A guardrail fails only if B is clearly worse than A by more than the margin,
+# i.e. the whole 90% CI of the relative change lies below -margin.
 GUARDRAILS = {
-    "match_minutes": ("Match length", "max_increase", 0.05),
-    "final_score": ("Average final score", "max_decrease", 0.05),
-    "rogue_spend": ("Points spent on Rogue effects", "abs_band", 0.03),
-    "d7": ("D7 retention (new players)", "abs_drop", 0.03),
+    "final_score": ("Average final score", 0.05),
+    "d7": ("D7 retention (new players)", 0.05),
 }
 
 # ---------------------------------------------------------------------------
@@ -64,17 +67,13 @@ NEW_PLAYERS_PER_DAY = 600    # installs per day
 MATCHES_PER_PLAYER = 6.0     # mean matches per player in the 14-day window
 ICC = 0.05                   # correlation of Common buys within one player
 D7_BASE = 0.15               # D7 retention of new players
-MATCH_MIN_MEAN, MATCH_MIN_SD = 15.0, 4.0
 SCORE_MEAN, SCORE_SD = 300.0, 120.0
-SPEND_MEAN, SPEND_SD = 0.30, 0.08
 
 # The "true" effects used by the SIMULATION (unknown in a real test)
-SIM_COMMON_CONTROL = 0.023
-SIM_COMMON_VARIANT = 0.040
+SIM_COMMON_CONTROL = 0.014   # chance a Common offer is bought (baseline 1.4%)
+SIM_COMMON_VARIANT = 0.030
 SIM_NOVELTY = (1.08, 0.94)   # variant effect multiplier in week 1 / week 2
-SIM_MATCH_MIN_LIFT = 0.017   # +1.7% (players read the payback line)
 SIM_SCORE_LIFT = -0.012
-SIM_SPEND_SHIFT = -0.008     # cheaper Commons -> slightly less spent
 SIM_D7_SHIFT = -0.003
 
 BOOTSTRAP_REPS = 1000
@@ -138,7 +137,7 @@ def ratio_and_se(ys, ns):
 
 
 def bootstrap_diff(a, b, rng, reps=BOOTSTRAP_REPS):
-    """Player-level bootstrap of the difference in Common share (B - A)."""
+    """Player-level bootstrap of the difference in Common purchase rate (B - A)."""
     ya, na = a
     yb, nb = b
     ka, kb = len(ya), len(yb)
@@ -167,9 +166,9 @@ def simulate(seed):
         p_common = rng.betavariate(mean * conc, (1 - mean) * conc)
         # how often the player plays in the window (at least one match)
         matches = 1 + poisson(MATCHES_PER_PLAYER - 1, rng)
-        skill = rng.gauss(0, 0.5)  # player-level offset for score / length
+        skill = rng.gauss(0, 0.5)  # player-level offset for score
         rec = {"arm": arm, "y": [0, 0], "n": [0, 0], "matches": matches,
-               "match_minutes": 0.0, "final_score": 0.0, "rogue_spend": 0.0}
+               "final_score": 0.0}
         for _ in range(matches):
             week = 0 if rng.random() < 0.5 else 1
             p = p_common
@@ -177,20 +176,17 @@ def simulate(seed):
                 # novelty: effect a bit larger in week 1, smaller in week 2
                 base = p_common * SIM_COMMON_CONTROL / SIM_COMMON_VARIANT
                 p = base + (p_common - base) * SIM_NOVELTY[week]
-            buys = poisson(LOG_PURCHASES / LOG_PLAYER_MATCHES, rng)
-            commons = sum(1 for _ in range(buys) if rng.random() < p)
-            rec["y"][week] += commons
-            rec["n"][week] += buys
-            minutes = rng.gauss(MATCH_MIN_MEAN + skill, MATCH_MIN_SD)
+            # turns with a Rogue purchase; each shows 3 offers, some of them Common
+            for _ in range(poisson(LOG_PURCHASE_TURNS / LOG_PLAYER_MATCHES, rng)):
+                k = sum(1 for _ in range(OFFERS_PER_TURN) if rng.random() < COMMON_OFFER_SHARE)
+                if k:
+                    # one purchase per turn: a Common is bought with chance 1-(1-p)^k
+                    rec["y"][week] += 1 if rng.random() < 1 - (1 - p) ** k else 0
+                    rec["n"][week] += k
             score = rng.gauss(SCORE_MEAN * (1 + 0.2 * skill), SCORE_SD)
-            spend = rng.gauss(SPEND_MEAN, SPEND_SD)
             if arm == "B":
-                minutes *= 1 + SIM_MATCH_MIN_LIFT
                 score *= 1 + SIM_SCORE_LIFT
-                spend += SIM_SPEND_SHIFT
-            rec["match_minutes"] += minutes
             rec["final_score"] += score
-            rec["rogue_spend"] += spend
         # new players whose day 7 falls inside the window
         rec["new"] = rng.random() < NEW_PLAYERS_PER_DAY * 7 / UNIQUE_PLAYERS_14D
         if rec["new"]:
@@ -219,42 +215,45 @@ def main():
     out = {}
 
     # 1. Baseline -----------------------------------------------------------
-    p0 = LOG_COMMON_PURCHASES / LOG_PURCHASES
-    per_match = LOG_PURCHASES / LOG_PLAYER_MATCHES
+    p0 = LOG_COMMON_PURCHASES / LOG_COMMON_OFFERS
+    per_match = LOG_PURCHASE_TURNS / LOG_PLAYER_MATCHES
     print("1. BASELINE (real playtest logs)")
-    print(f"   Common share of Rogue purchases: {LOG_COMMON_PURCHASES}/{LOG_PURCHASES} = {pct(p0, 2)}")
-    print(f"   Common share of offers:          {pct(COMMON_OFFER_SHARE)}")
-    print(f"   Purchases per player per match:  {per_match:.1f}")
-    out["baseline"] = {"p0": p0, "offer_share": COMMON_OFFER_SHARE, "per_match": per_match}
+    print(f"   Turns with a Rogue purchase:          {LOG_PURCHASE_TURNS}")
+    print(f"   Common offers on those turns:         ~{LOG_COMMON_OFFERS} ({OFFERS_PER_TURN} offers x {pct(COMMON_OFFER_SHARE)})")
+    print(f"   Common purchases per Common offer:    {LOG_COMMON_PURCHASES}/{LOG_COMMON_OFFERS} = {pct(p0, 2)}")
+    print(f"   Purchase turns per player per match:  {per_match:.1f}")
+    out["baseline"] = {"p0": p0, "common_offers": LOG_COMMON_OFFERS,
+                       "offer_share": COMMON_OFFER_SHARE, "per_match": per_match}
 
     # 2. Power -----------------------------------------------------------------
     n_iid = n_two_proportions(p0, p0 + MDE_ABS)
-    m = MATCHES_PER_PLAYER * per_match          # purchases per player in window
+    m = MATCHES_PER_PLAYER * per_match * OFFERS_PER_TURN * COMMON_OFFER_SHARE  # Common offers per player
     deff = 1 + (m - 1) * ICC
     n_purch = math.ceil(n_iid * deff)
     n_players = math.ceil(n_purch / m)
     print("\n2. SAMPLE SIZE (primary KPI)")
     print(f"   MDE: {pp(MDE_ABS, 1)} ({pct(p0, 1)} -> {pct(p0 + MDE_ABS, 1)}), alpha {ALPHA}, power {POWER}")
-    print(f"   Purchases per group if independent: {n_iid:,}")
-    print(f"   Purchases per player in 14 days:    {m:.1f}")
-    print(f"   Design effect 1 + (m-1)*ICC:         {deff:.2f}  (ICC {ICC})")
-    print(f"   Purchases per group, clustered:      {n_purch:,}")
-    print(f"   Players per group:                   {n_players:,}")
+    print(f"   Common offers per group if independent:  {n_iid:,}")
+    print(f"   Common offers per player in 14 days:    {m:.1f}")
+    print(f"   Design effect 1 + (m-1)*ICC:             {deff:.2f}  (ICC {ICC})")
+    print(f"   Common offers per group, clustered:      {n_purch:,}")
+    print(f"   Players per group:                       {n_players:,}")
 
     per_arm_players = UNIQUE_PLAYERS_14D / 2
     eff_n = per_arm_players * m / deff
     mde_reach = mde_two_proportions(p0, eff_n)
     d7_n = NEW_PLAYERS_PER_DAY * 7 / 2
-    d7_need_1pp = n_noninferiority(D7_BASE, 0.01)
+    d7_margin = GUARDRAILS["d7"][1] * D7_BASE   # 5% relative = 0.75 pp
+    d7_need = n_noninferiority(D7_BASE, d7_margin)
     d7_reach = ni_margin(D7_BASE, d7_n)
-    print("\n   Guardrail power (D7 retention, one-sided non-inferiority)")
+    print("\n   Guardrail precision (D7 retention)")
     print(f"   New players per group with a D7 in the window: {d7_n:,.0f}")
-    print(f"   Needed to rule out a 1 pp drop:                 {d7_need_1pp:,}")
-    print(f"   Smallest drop this test can rule out:           {pp(-d7_reach, 1)}")
+    print(f"   Needed to detect a {GUARDRAILS['d7'][1]:.0%} drop ({pp(-d7_margin)}):      {d7_need:,}")
+    print(f"   Smallest drop this test reliably detects:       {pp(-d7_reach, 1)} ({-d7_reach / D7_BASE:+.0%})")
     out["power"] = {"mde": MDE_ABS, "n_iid": n_iid, "m": m, "deff": deff,
-                    "n_purchases": n_purch, "n_players": n_players,
+                    "n_common_offers": n_purch, "n_players": n_players,
                     "mde_reach": mde_reach, "d7_n": d7_n,
-                    "d7_need_1pp": d7_need_1pp, "d7_reach": d7_reach}
+                    "d7_need": d7_need, "d7_reach": d7_reach}
 
     # 3. Duration --------------------------------------------------------------
     players_per_day = UNIQUE_PLAYERS_14D / 14 / 2  # rough: new uniques per group
@@ -297,14 +296,15 @@ def main():
     obs_deff = sa ** 2 / (ra * (1 - ra) / sum(na))
     boot = bootstrap_diff((ya, na), (yb, nb), rng)
     print("\n5. ANALYSIS")
-    print(f"   Purchases: A {sum(na):,} / B {sum(nb):,}")
-    print(f"   Common share  A {pct(ra, 2)}   B {pct(rb, 2)}")
-    print(f"   Difference    {pp(diff)}  (95% CI {pp(ci[0])} to {pp(ci[1])}), p {"< 0.001" if p_val < 0.001 else f"= {p_val:.3f}"}")
+    p_txt = "< 0.001" if p_val < 0.001 else f"= {p_val:.3f}"
+    print(f"   Common offers: A {sum(na):,} / B {sum(nb):,}")
+    print(f"   Common purchase rate  A {pct(ra, 2)}   B {pct(rb, 2)}")
+    print(f"   Difference    {pp(diff)}  (95% CI {pp(ci[0])} to {pp(ci[1])}), p {p_txt}")
     print(f"   Relative lift {diff / ra:+.0%}")
     print(f"   Bootstrap 95% CI ({BOOTSTRAP_REPS} player resamples): {pp(boot[0])} to {pp(boot[1])}")
     print(f"   Observed design effect: {obs_deff:.2f}")
     out["result"] = {"nA": nA, "nB": nB, "chi": chi, "p_srm": p_srm,
-                     "purchA": sum(na), "purchB": sum(nb), "ra": ra, "rb": rb,
+                     "offersA": sum(na), "offersB": sum(nb), "ra": ra, "rb": rb,
                      "diff": diff, "ci": ci, "p": p_val, "rel": diff / ra,
                      "boot": boot, "obs_deff": obs_deff,
                      "ciA": (ra - zc * sa, ra + zc * sa), "ciB": (rb - zc * sb, rb + zc * sb)}
@@ -326,9 +326,9 @@ def main():
 
     # guardrails
     zg = z(1 - GUARDRAIL_ALPHA)  # 90% two-sided CI = one-sided 95% bound
-    print("\n   Guardrails (90% CI vs. margin)")
+    print("\n   Guardrails (90% CI of the relative change vs. margin)")
     guard = {}
-    for key, (label, kind, margin) in GUARDRAILS.items():
+    for key, (label, margin) in GUARDRAILS.items():
         if key == "d7":
             xa = [p["d7"] for p in A if p["new"]]
             xb = [p["d7"] for p in B if p["new"]]
@@ -339,30 +339,13 @@ def main():
             mb, seb = ratio_and_se([p[key] for p in B], [p["matches"] for p in B])
             se_g = math.sqrt(sea ** 2 + seb ** 2)
         d = mb - ma
-        lo, hi = d - zg * se_g, d + zg * se_g
-        if kind == "max_increase":
-            ok = hi < margin * ma
-            shown = (d / ma, lo / ma, hi / ma)
-            rule = f"increase < {margin:.0%}"
-        elif kind == "max_decrease":
-            ok = lo > -margin * ma
-            shown = (d / ma, lo / ma, hi / ma)
-            rule = f"decrease < {margin:.0%}"
-        elif kind == "abs_band":
-            ok = lo > -margin and hi < margin
-            shown = (d, lo, hi)
-            rule = f"within ±{margin * 100:.0f} pp"
-        else:
-            ok = lo > -margin
-            shown = (d, lo, hi)
-            rule = f"drop < {margin * 100:.0f} pp"
-        rel = kind.startswith("max")
-        fmt = (lambda v: f"{v:+.1%}") if rel else (lambda v: pp(v, 1))
-        print(f"   {label:32s} A {ma:8.3f}  B {mb:8.3f}  {fmt(shown[0])}"
-              f"  (90% CI {fmt(shown[1])} to {fmt(shown[2])})  rule: {rule}  -> {'pass' if ok else 'FAIL'}")
-        guard[key] = {"label": label, "a": ma, "b": mb, "delta": shown[0],
-                      "lo": shown[1], "hi": shown[2], "relative": rel,
-                      "rule": rule, "pass": ok}
+        lo, hi = (d - zg * se_g) / ma, (d + zg * se_g) / ma
+        ok = hi >= -margin   # fails only if clearly down by more than the margin
+        rule = f"fail if clearly down > {margin:.0%}"
+        print(f"   {label:28s} A {ma:8.3f}  B {mb:8.3f}  {d / ma:+.1%}"
+              f"  (90% CI {lo:+.1%} to {hi:+.1%})  rule: {rule}  -> {'pass' if ok else 'FAIL'}")
+        guard[key] = {"label": label, "a": ma, "b": mb, "delta": d / ma,
+                      "lo": lo, "hi": hi, "rule": rule, "pass": ok}
     out["guardrails"] = guard
 
     # 6. Decision ----------------------------------------------------------------

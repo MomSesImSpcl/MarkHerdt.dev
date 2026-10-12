@@ -1,16 +1,16 @@
-# Rogue Deck – Economy simulation
+# Rogue Deck economy simulation
 
-Monte Carlo simulation behind the **Collection progress** charts on the
+Monte Carlo simulation behind the Collection progress charts on the
 [LiveOps & economy case study](https://markherdt.dev/games/rogue-deck/liveops-and-economy.html).
 
 It simulates players opening booster packs month by month and measures how much
 of the collection they own:
 
-- **Effects:** all 61 effect variants (35 playing-card + 26 Rogue), in any art style
-- **Artworks:** all 312 artworks (52 playing cards × 4 art styles + 26 Rogue cards × 4 art styles)
+- Effects: all 61 effect variants (35 playing-card + 26 Rogue), in any art style
+- Artworks: all 312 artworks (52 playing cards × 4 art styles + 26 Rogue cards × 4 art styles)
 
-Each profile is simulated 300 times. The output shows the **mean** and the
-**10th–90th percentile range** (the unluckiest and luckiest 10% of players).
+Each profile is simulated 300 times. The output shows the mean and the
+10th–90th percentile range (the unluckiest and luckiest 10% of players).
 
 ## Run it
 
