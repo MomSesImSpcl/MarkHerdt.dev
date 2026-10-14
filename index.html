@@ -97,8 +97,8 @@ h2{font-size:1.8rem;margin-bottom:8px}
 .games .case .tags .chips{margin-top:0}
 .games .featured{grid-column:1/-1;grid-template-columns:3fr 2fr}
 .games .featured .vid{grid-column:1;grid-row:1/-1;justify-content:center}
-.games .featured .vid::before{content:"";position:absolute;inset:-30px;background:var(--cover) center/cover;filter:blur(24px) brightness(.45)}
-.games .featured .vid>*{position:relative}
+.games .featured .vid{align-items:stretch}
+.games .featured .vid img{height:100%;aspect-ratio:1;object-fit:cover}
 .games .featured .vid .play{position:absolute}
 .games .featured .body{grid-column:2}
 @media(max-width:700px){.games .featured{grid-template-columns:1fr}.games .featured .vid{grid-row:auto}.games .featured .body{grid-column:1}}
@@ -144,7 +144,7 @@ footer{padding:30px 0;text-align:center;color:var(--muted);font-size:.85rem;bord
   <div class="grid games">
 
     <article class="card case featured">
-      <div class="vid" style="--cover:url(https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2658820/header.jpg)" data-id="RMRHCmWvCqo" role="button" tabindex="0" aria-label="Play trailer"><img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2658820/header.jpg" alt="Watermelon Game key art"><span class="play">▶</span></div>
+      <div class="vid" data-id="RMRHCmWvCqo" role="button" tabindex="0" aria-label="Play trailer"><img src="images/watermelon-game.jpg" alt="Watermelon Game key art"><span class="play">▶</span></div>
       <div class="body">
         <p class="kicker">Gameplay &amp; Mechanics</p>
         <h3>Watermelon Game</h3>
